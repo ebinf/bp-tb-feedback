@@ -11,11 +11,13 @@ datasource db {
 }
 
 model User {
-  id           String    @id @unique
-  username     String    @unique
+  id        String @id @unique
+  username  String @unique
+  full_name String
 
   auth_session Session[]
   key          Key[]
+  Group        Group[]
 }
 
 model Session {
@@ -35,4 +37,21 @@ model Key {
   user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@index([user_id])
+}
+
+model Term {
+  id   Int    @id @unique @default(autoincrement())
+  name String
+
+  groups Group[]
+}
+
+model Group {
+  id      Int    @id @unique @default(autoincrement())
+  number  Int
+  name    String
+  term_id Int
+  term    Term   @relation(references: [id], fields: [term_id], onDelete: Cascade)
+  lead_id String
+  lead    User   @relation(references: [id], fields: [lead_id], onDelete: Cascade)
 }

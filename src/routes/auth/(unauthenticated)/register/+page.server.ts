@@ -36,7 +36,8 @@ export const actions: Actions = {
 					password
 				},
 				attributes: {
-					username: username.toLowerCase()
+					username: username.toLowerCase(),
+					full_name: 'Anonyme:r Benutzer:in'
 				}
 			});
 			const session = await auth.createSession({
