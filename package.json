@@ -35,6 +35,7 @@
 	"dependencies": {
 		"@lucia-auth/adapter-prisma": "^3.0.2",
 		"@prisma/client": "^5.5.2",
-		"lucia": "^2.7.3"
+		"lucia": "^2.7.3",
+		"svelte-transition-classes": "^0.1.1"
 	}
 }

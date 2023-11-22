@@ -9,7 +9,7 @@ export const actions: Actions = {
 		if (!session) return fail(401);
 		await auth.invalidateSession(session.sessionId);
 		locals.auth.setSession(null);
-		throw redirect(302, '/auth/login?loggedout');
+		throw redirect(302, '/login?loggedout');
 	},
 
 	logout_everywhere: async ({ locals }) => {
@@ -17,6 +17,6 @@ export const actions: Actions = {
 		if (!session) return fail(401);
 		await auth.invalidateAllUserSessions(session.user.userId);
 		locals.auth.setSession(null);
-		throw redirect(302, '/auth/login?loggedout&everywhere');
+		throw redirect(302, '/login?loggedout');
 	}
 };

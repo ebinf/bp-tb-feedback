@@ -16,3 +16,5 @@ function setTitle() {
 }
 
 export const title = setTitle();
+
+export const heading = writable('');

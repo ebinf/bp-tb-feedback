@@ -4,7 +4,7 @@ import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ locals, request }) => {
 	const session = await locals.auth.validate();
-	if (!session) throw redirect(302, `/auth/login?r=${new URL(request.url).pathname}`);
+	if (!session) throw redirect(302, `/login?r=${new URL(request.url).pathname}`);
 	return {
 		userId: session.user.userId,
 		username: session.user.username,

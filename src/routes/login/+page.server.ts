@@ -4,6 +4,12 @@ import { fail, redirect } from '@sveltejs/kit';
 
 import type { Actions, PageServerLoad } from './$types';
 
+export const load: PageServerLoad = async ({ locals }) => {
+	const session = await locals.auth.validate();
+	if (session) throw redirect(302, `/dashboard`);
+	return {};
+};
+
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
@@ -12,12 +18,12 @@ export const actions: Actions = {
 
 		if (username.length < 1 || username.length > 31) {
 			return fail(400, {
-				message: 'Invalid username'
+				message: 'Der eingegebene Anmeldename ist ungültig.'
 			});
 		}
 		if (password.length < 1 || password.length > 255) {
 			return fail(400, {
-				message: 'Invalid password'
+				message: 'Das eingegebene Passwort ist ungültig.'
 			});
 		}
 
@@ -36,14 +42,14 @@ export const actions: Actions = {
 				// user does not exist
 				// or invalid password
 				return fail(400, {
-					message: 'Incorrect username or password'
+					message: 'Anmeldename oder Passwort sind falsch oder das Konto existiert nicht.'
 				});
 			}
 			return fail(500, {
-				message: 'An unknown error occurred'
+				message: 'Ein unbekannter Fehler ist aufgetreten.'
 			});
 		}
 
-		throw redirect(302, '/user/profile');
+		throw redirect(302, '/dashboard');
 	}
 };

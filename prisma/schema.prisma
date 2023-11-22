@@ -40,18 +40,51 @@ model Key {
 }
 
 model Term {
-  id   Int    @id @unique @default(autoincrement())
-  name String
+  id     Int     @id @unique @default(autoincrement())
+  name   String
+  active Boolean @default(false)
 
   groups Group[]
 }
 
 model Group {
-  id      Int    @id @unique @default(autoincrement())
-  number  Int
-  name    String
-  term_id Int
-  term    Term   @relation(references: [id], fields: [term_id], onDelete: Cascade)
-  lead_id String
-  lead    User   @relation(references: [id], fields: [lead_id], onDelete: Cascade)
+  id            Int         @id @unique @default(autoincrement())
+  number        Int
+  name          String
+  term_id       Int
+  term          Term        @relation(references: [id], fields: [term_id], onDelete: Cascade)
+  lead_id       String
+  lead          User        @relation(references: [id], fields: [lead_id], onDelete: Cascade)
+  feedback_link String?     @unique @default(cuid())
+  Feedback      Feedback[]
+  PollRound     PollRound[]
+}
+
+model Feedback {
+  id        Int      @id @unique @default(autoincrement())
+  group_id  Int
+  group     Group    @relation(references: [id], fields: [group_id], onDelete: Cascade)
+  timestamp DateTime @default(now())
+  read      DateTime
+  name      String
+  feedback  String   @db.Text
+}
+
+model PollRound {
+  id       Int      @id @unique @default(autoincrement())
+  link     String   @unique @default(cuid())
+  group_id Int
+  group    Group    @relation(references: [id], fields: [group_id], onDelete: Cascade)
+  created  DateTime @default(now())
+  open     Boolean  @default(true)
+  question String
+  votes    Vote[]
+}
+
+model Vote {
+  id            Int       @id @unique @default(autoincrement())
+  poll_round_id Int
+  poll_round    PollRound @relation(references: [id], fields: [poll_round_id], onDelete: Cascade)
+  vote          Int
+  comment       String?
 }

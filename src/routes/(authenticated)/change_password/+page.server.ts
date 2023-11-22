@@ -18,13 +18,14 @@ export const actions: Actions = {
 			new_password.length > 255
 		) {
 			return fail(400, {
-				error: 'Invalid password'
+				error:
+					'Das eingegebene Passwort ist ungültig. Es sollte zwischen 10 und 255 Zeichen lang sein.'
 			});
 		}
 
 		if (new_password !== repeat_password) {
 			return fail(400, {
-				error: 'Passwords do not match'
+				error: 'Die beiden Passwörter stimmen nicht überein.'
 			});
 		}
 
@@ -39,16 +40,17 @@ export const actions: Actions = {
 				(e.message === 'AUTH_INVALID_KEY_ID' || e.message === 'AUTH_INVALID_PASSWORD')
 			) {
 				return fail(400, {
-					error: 'Incorrect password'
+					error: 'Das aktuelle Passwort ist falsch.'
 				});
 			}
 			return fail(500, {
-				error: 'An unknown error occurred'
+				error: 'Es ist ein unbekannter Fehler aufgetreten.'
 			});
 		}
 
 		return {
-			success: 'Password changed successfully. You can now log in with your new password.'
+			success:
+				'Das Passwort wurde erfolgreich geändert. Ab jetzt kannst du dich mit dem neuen Passwort anmelden.'
 		};
 	}
 };
