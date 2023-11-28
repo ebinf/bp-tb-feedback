@@ -32,7 +32,7 @@
 			</div>
 			<div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 				<dt class="text-sm font-medium text-gray-900">
-					Gelesen <span class="font-normal">(von dir)</span>
+					Gelesen <span class="font-normal text-gray-700">(von dir)</span>
 				</dt>
 				<dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
 					{#if data.feedback_details?.read}{data.feedback_details.read.toLocaleString()} Uhr{:else}<div
@@ -42,8 +42,10 @@
 			</div>
 			<div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 				<dt class="text-sm font-medium text-gray-900">Nachricht</dt>
-				<dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-					{data.feedback_details?.feedback}
+				<dd class="grow mt-1 text-sm text-gray-700 sm:col-span-2 sm:mt-0 leading-loose">
+					{#each data.feedback_details?.feedback.split('\n') as line}
+						<p class="mb-2">{line}</p>
+					{/each}
 				</dd>
 			</div>
 		</dl>

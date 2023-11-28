@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let scheme: 'primary' | 'secondary' = 'primary';
-	export let submit = false;
+	export let submit: boolean = false;
 	export let spinner: boolean = false;
 	export let disabled: boolean = false;
 	export let clazz: string;
