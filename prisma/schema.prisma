@@ -66,8 +66,8 @@ model Feedback {
   group     Group     @relation(references: [id], fields: [group_id], onDelete: Cascade)
   timestamp DateTime  @default(now())
   read      DateTime?
-  name      String?
-  feedback  String    @db.Text
+  name      String?   /// @encrypted
+  feedback  String    @db.Text /// @encrypted
 }
 
 model PollRound {
