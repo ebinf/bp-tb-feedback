@@ -61,13 +61,13 @@ model Group {
 }
 
 model Feedback {
-  id        Int      @id @unique @default(autoincrement())
+  id        Int       @id @unique @default(autoincrement())
   group_id  Int
-  group     Group    @relation(references: [id], fields: [group_id], onDelete: Cascade)
-  timestamp DateTime @default(now())
-  read      DateTime
-  name      String
-  feedback  String   @db.Text
+  group     Group     @relation(references: [id], fields: [group_id], onDelete: Cascade)
+  timestamp DateTime  @default(now())
+  read      DateTime?
+  name      String?
+  feedback  String    @db.Text
 }
 
 model PollRound {
@@ -77,7 +77,7 @@ model PollRound {
   group    Group    @relation(references: [id], fields: [group_id], onDelete: Cascade)
   created  DateTime @default(now())
   open     Boolean  @default(true)
-  question String
+  question String?
   votes    Vote[]
 }
 

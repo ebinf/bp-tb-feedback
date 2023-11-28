@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Notifications from './notifications.svelte';
 	import Navbar from './navbar.svelte';
 	import { title, heading } from './stores';
 
@@ -26,3 +27,5 @@
 		</main>
 	</div>
 </div>
+
+<Notifications />

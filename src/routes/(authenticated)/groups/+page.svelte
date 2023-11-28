@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Term from './term.svelte';
 	import Empty from './empty.svelte';
+	import EmptyTerm from './empty_term.svelte';
 
 	import { title, heading } from '../stores';
 	title.set('Gruppen');
@@ -9,9 +10,13 @@
 	export let data;
 </script>
 
-{#if data.terms.length === 0}
-	<Empty />
-{/if}
-{#each data.terms as term}
-	<Term {term} />
-{/each}
+{#await data.streamed.terms}
+	<EmptyTerm />
+{:then terms}
+	{#if terms.length === 0}
+		<Empty />
+	{/if}
+	{#each terms as term}
+		<Term {term} />
+	{/each}
+{/await}

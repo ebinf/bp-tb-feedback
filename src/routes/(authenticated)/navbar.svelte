@@ -10,7 +10,15 @@
 		},
 		{
 			name: 'Gruppen',
-			href: '/groups'
+			href: '/groups',
+			active: [
+				'/(authenticated)/group/[groupid=integer]/overview',
+				'/(authenticated)/group/[groupid=integer]/feedback',
+				'/(authenticated)/group/[groupid=integer]/feedback/[feedbackid=integer]',
+				'/(authenticated)/group/[groupid=integer]/polls',
+				'/(authenticated)/group/[groupid=integer]/polls/new',
+				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]'
+			]
 		}
 	];
 
@@ -54,7 +62,8 @@
 					{#each menu_entries as entry}
 						<a
 							href={entry.href}
-							class="{$page?.url?.pathname === entry.href
+							class="{$page?.url?.pathname === entry.href ||
+							entry.active?.includes($page?.route?.id ?? '')
 								? 'border-primary-500 text-gray-900'
 								: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}  inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
 							>{entry.name}</a
@@ -215,7 +224,8 @@
 				{#each menu_entries as entry}
 					<a
 						href={entry.href}
-						class="{$page?.url?.pathname === entry.href
+						class="{$page?.url?.pathname === entry.href ||
+						entry.active?.includes($page?.route?.id ?? '')
 							? 'border-primary-500 bg-primary-50 text-primary-700'
 							: 'border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800'} block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
 						on:click={() => (mobileMenuShown = false)}>{entry.name}</a

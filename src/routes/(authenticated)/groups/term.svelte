@@ -6,6 +6,7 @@
 			id: number;
 			number: number;
 			name: string;
+			Feedback: any[];
 		}[];
 	};
 </script>
@@ -14,36 +15,49 @@
 	<h2 class="text-sm font-medium text-gray-500">{term.name}</h2>
 	<ul role="list" class="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
 		{#each term.groups as group}
-			<li class="col-span-1 flex rounded-md shadow-sm">
+			<li>
 				<a
+					class="group col-span-1 flex rounded-md shadow-sm"
+					class:shadow-primary-300={group.Feedback.length > 0}
 					href="/group/{group.id}"
-					class="flex w-16 flex-shrink-0 items-center justify-center bg-primary-600 rounded-l-md text-lg font-medium text-white"
 				>
-					{group.number}
-				</a>
-				<div
-					class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white"
-				>
-					<div class="flex-1 truncate px-4 py-2 text-sm">
-						<a href="/group/{group.id}" class="font-medium text-gray-900 hover:text-gray-600"
-							>{group.name}</a
-						>
-						<p class="text-gray-500">16 Members</p>
+					<div
+						class="flex w-16 flex-shrink-0 items-center justify-center bg-primary-600 group-hover:bg-primary-500 rounded-l-md text-lg font-medium text-white"
+					>
+						{group.number}
 					</div>
+					<div
+						class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white group-hover:bg-gray-50"
+					>
+						<div class="flex-1 truncate px-4 py-2 text-sm">
+							<span class="font-medium text-gray-900 group-hover:text-gray-600">{group.name}</span>
+							{#if group.Feedback.length == 1}
+								<p class="text-gray-500 font-medium">Ein ungelesenes Feedback</p>
+							{:else if group.Feedback.length > 0}
+								<p class="text-gray-500 font-medium">
+									{group.Feedback.length} ungelesene Feedbacks
+								</p>
+							{:else}
+								<p class="text-gray-500">Auf dem neuesten Stand</p>
+							{/if}
+						</div>
+						<!-- 
 					<div class="flex-shrink-0 pr-2">
 						<button
-							type="button"
+						type="button"
 							class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
 						>
 							<span class="sr-only">Open options</span>
 							<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 								<path
-									d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z"
+								d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z"
 								/>
 							</svg>
 						</button>
 					</div>
-				</div>
+					 -->
+					</div>
+				</a>
 			</li>
 		{/each}
 	</ul>

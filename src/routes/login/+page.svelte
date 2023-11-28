@@ -18,18 +18,6 @@
 	<title>Login | {PUBLIC_SITE_NAME}</title>
 </svelte:head>
 
-{#if form?.message}
-	<Toast style="fail">{form.message}</Toast>
-{:else if redirect}
-	<Toast style="fail">Bitte melde dich an, um auf diese Seite zuzugreifen.</Toast>
-{:else if loggedout}
-	<Toast style="success">Du wurdest erfolgreich abgemeldet.</Toast>
-{:else if deleted}
-	<Toast style="success">Dein Account wurde erfolgreich gelöscht.</Toast>
-{:else if registered}
-	<Toast style="success">Du hast dich erfolgreich registriert. Bitte melde dich nun an.</Toast>
-{/if}
-
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 	<div class="mb-10 lg:mx-auto lg:w-full lg:max-w-sm">
 		<img
@@ -43,7 +31,7 @@
 		class="grid grid-cols-1 md:grid-cols-2 divide-gray-200 divide-y md:divide-y-0 md:divide-x mx-auto w-full lg:w-2/3 xl:w-1/2"
 	>
 		<div class="md:px-6 md:py-0 py-6">
-			<div>
+			<div class="mb-4">
 				<h2 class="text-center text-2xl mb-2 font-bold leading-9 tracking-tight text-gray-900">
 					Du bist Teambegleiter:in?
 				</h2>
@@ -51,7 +39,24 @@
 					Bitte verwende die Anmeldedaten, die du erhalten hast.
 				</p>
 			</div>
-			<form class="space-y-6 mt-10" method="POST" use:enhance>
+			<div>
+				{#if form?.message}
+					<Toast style="fail">{form.message}</Toast>
+				{:else if redirect}
+					<Toast style="fail" dismissable={true}
+						>Bitte melde dich an, um auf diese Seite zuzugreifen.</Toast
+					>
+				{:else if loggedout}
+					<Toast style="success">Du wurdest erfolgreich abgemeldet.</Toast>
+				{:else if deleted}
+					<Toast style="success">Dein Account wurde erfolgreich gelöscht.</Toast>
+				{:else if registered}
+					<Toast style="success"
+						>Du hast dich erfolgreich registriert. Bitte melde dich nun an.</Toast
+					>
+				{/if}
+			</div>
+			<form class="space-y-6 mt-6" method="POST" use:enhance>
 				<div>
 					<label for="username" class="block text-sm font-medium leading-6 text-gray-900"
 						>Anmeldename</label
