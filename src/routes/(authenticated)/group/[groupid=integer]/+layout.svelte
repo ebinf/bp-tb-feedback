@@ -83,7 +83,7 @@
 							<span
 								class="{$page.url.pathname.split('/').pop() === tab.href
 									? 'bg-primary-100 text-primary-700'
-									: 'bg-gray-200 text-gray-700'} inline-flex items-center rounded ml-1 px-2 py-1 text-xs font-medium"
+									: 'bg-gray-200 text-gray-700'} ml-1 inline-flex items-center rounded px-2 py-1 text-xs font-medium"
 								>{unread_feedback}</span
 							>
 						{/if}

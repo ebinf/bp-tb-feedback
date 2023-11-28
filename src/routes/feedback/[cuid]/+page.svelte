@@ -12,7 +12,7 @@
 </svelte:head>
 
 <main>
-	<header class="relative isolate bg-white border-b border-gray-200">
+	<header class="relative isolate border-b border-gray-200 bg-white">
 		<div class="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
 			<div
 				class="absolute left-16 top-full -mt-16 transform-gpu opacity-50 blur-3xl xl:left-1/2 xl:-ml-80"
@@ -31,13 +31,13 @@
 			>
 				<div class="flex items-center gap-x-6">
 					<div
-						class="h-16 w-16 flex-none sm:flex hidden rounded-full items-center justify-center ring-1 ring-gray-900/10 text-primary-600"
+						class="hidden h-16 w-16 flex-none items-center justify-center rounded-full text-primary-600 ring-1 ring-gray-900/10 sm:flex"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
 							fill="currentColor"
-							class="w-10 h-10"
+							class="h-10 w-10"
 						>
 							<path
 								fill-rule="evenodd"
@@ -68,7 +68,7 @@
 			class="mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3"
 		>
 			<div
-				class="-mx-4 px-4 py-8 shadow-sm ring-1 bg-white ring-gray-900/5 sm:mx-0 sm:rounded-lg sm:px-8 sm:pb-14 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:px-8 xl:py-8"
+				class="-mx-4 bg-white px-4 py-8 shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg sm:px-8 sm:pb-14 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:px-8 xl:py-8"
 			>
 				{#if form?.error}
 					<div class="mb-6">
@@ -79,7 +79,7 @@
 						<Toast dismissable={false} style="success">{form.success}</Toast>
 					</div>
 				{/if}
-				<Form disabled={form?.success} />
+				<Form disabled={!!form?.success} />
 			</div>
 
 			<Sidebar lead_name={data.group?.lead?.full_name} />

@@ -3,7 +3,7 @@ import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 
 function setTitle() {
-	const { subscribe, set, update } = writable(PUBLIC_SITE_NAME);
+	const { subscribe, set } = writable(PUBLIC_SITE_NAME);
 
 	return {
 		subscribe,

@@ -15,7 +15,7 @@
 {/if}
 
 <form method="POST" use:enhance>
-	<div class="space-y-4 mt-4 w-full md:w-1/2 lg:w-1/3">
+	<div class="mt-4 w-full space-y-4 md:w-1/2 lg:w-1/3">
 		<div>
 			<label for="current_password" class="block text-sm font-medium leading-6 text-gray-900"
 				>Aktuelles Passwort</label

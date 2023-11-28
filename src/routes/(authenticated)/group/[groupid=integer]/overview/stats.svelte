@@ -17,7 +17,7 @@
 					{data?.feedback?.length ?? 0}
 					{#if data?.unread_feedback && data?.unread_feedback > 0}
 						<span
-							class="bg-primary-100 text-primary-700 marker:inline-flex items-center rounded ml-1 px-2 py-1 text-lg font-medium"
+							class="ml-1 items-center rounded bg-primary-100 px-2 py-1 text-lg font-medium text-primary-700 marker:inline-flex"
 							>{data?.unread_feedback}&nbsp;ungelesen</span
 						>
 					{/if}

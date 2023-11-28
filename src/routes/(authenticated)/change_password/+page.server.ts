@@ -32,7 +32,7 @@ export const actions: Actions = {
 		try {
 			const session = await locals.auth.validate();
 			if (!session) throw redirect(302, '/auth/login');
-			const key = await auth.useKey('username', session?.user.username, current_password);
+			await auth.useKey('username', session?.user.username, current_password);
 			await auth.updateKeyPassword('username', session?.user.username, new_password);
 		} catch (e) {
 			if (

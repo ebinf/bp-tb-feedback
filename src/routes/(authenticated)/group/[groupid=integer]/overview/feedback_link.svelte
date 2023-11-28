@@ -54,7 +54,7 @@
 									copiedText = false;
 								}, 2000);
 							}}
-							class="block w-full rounded-md border-0 py-1.5 text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 bg-gray-50 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
+							class="block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
 							class:text-center={copiedText}
 							class:font-medium={copiedText}
 							value={copiedText
@@ -117,9 +117,9 @@
 			>
 				<span slot="title">Feedback-Link neu erzeugen</span>
 				<span slot="content"
-					>Du bist dabei, den Feedback-Link für <span class="text-gray-700 font-medium"
+					>Du bist dabei, den Feedback-Link für <span class="font-medium text-gray-700"
 						>{data.group?.number}</span
-					>&nbsp;<span class="text-gray-900 font-bold">{data.group?.name}</span> neu zu erzeugen. Wenn
+					>&nbsp;<span class="font-bold text-gray-900">{data.group?.name}</span> neu zu erzeugen. Wenn
 					du das tust, wird der alte Link ungültig und kann nicht mehr verwendet werden! Bist du sicher,
 					dass du den Link neu erzeugen möchtest?</span
 				>

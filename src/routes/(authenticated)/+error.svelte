@@ -6,7 +6,7 @@
 	heading.set('Fehler');
 </script>
 
-<div class="rounded-md bg-red-50 p-4 mt-4 border-red-100 border">
+<div class="mt-4 rounded-md border border-red-100 bg-red-50 p-4">
 	<div class="flex">
 		<div class="flex-shrink-0">
 			<svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -32,7 +32,7 @@
 					<li>
 						Wenn das Problem weiterhin besteht, <a
 							href="mailto:{PUBLIC_SUPPORT_ADDRESS}"
-							class="underline text-red-800 font-medium hover:text-red-900"
+							class="font-medium text-red-800 underline hover:text-red-900"
 							>nimm bitte Kontakt auf</a
 						>.
 					</li>

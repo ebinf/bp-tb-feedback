@@ -36,13 +36,13 @@
 				</dt>
 				<dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
 					{#if data.feedback_details?.read}{data.feedback_details.read.toLocaleString()} Uhr{:else}<div
-							class="h-2 w-32 bg-gray-300 rounded animate-pulse"
+							class="h-2 w-32 animate-pulse rounded bg-gray-300"
 						/>{/if}
 				</dd>
 			</div>
 			<div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 				<dt class="text-sm font-medium text-gray-900">Nachricht</dt>
-				<dd class="grow mt-1 text-sm text-gray-700 sm:col-span-2 sm:mt-0 leading-loose">
+				<dd class="mt-1 grow text-sm leading-loose text-gray-700 sm:col-span-2 sm:mt-0">
 					{#each data.feedback_details?.feedback.split('\n') as line}
 						<p class="mb-2">{line}</p>
 					{/each}

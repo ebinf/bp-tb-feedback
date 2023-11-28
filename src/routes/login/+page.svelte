@@ -28,14 +28,14 @@
 	</div>
 
 	<div
-		class="grid grid-cols-1 md:grid-cols-2 divide-gray-200 divide-y md:divide-y-0 md:divide-x mx-auto w-full lg:w-2/3 xl:w-1/2"
+		class="mx-auto grid w-full grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-x md:divide-y-0 lg:w-2/3 xl:w-1/2"
 	>
-		<div class="md:px-6 md:py-0 py-6">
+		<div class="py-6 md:px-6 md:py-0">
 			<div class="mb-4">
-				<h2 class="text-center text-2xl mb-2 font-bold leading-9 tracking-tight text-gray-900">
+				<h2 class="mb-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
 					Du bist Teambegleiter:in?
 				</h2>
-				<p class="text-gray-500 text-center">
+				<p class="text-center text-gray-500">
 					Bitte verwende die Anmeldedaten, die du erhalten hast.
 				</p>
 			</div>
@@ -56,7 +56,7 @@
 					>
 				{/if}
 			</div>
-			<form class="space-y-6 mt-6" method="POST" use:enhance>
+			<form class="mt-6 space-y-6" method="POST" use:enhance>
 				<div>
 					<label for="username" class="block text-sm font-medium leading-6 text-gray-900"
 						>Anmeldename</label
@@ -110,12 +110,12 @@
 			</p>
 		</div>
 
-		<div class="md:px-6 md:py-0 py-6 flex h-full items-center">
+		<div class="flex h-full items-center py-6 md:px-6 md:py-0">
 			<div>
-				<h2 class="text-center text-2xl mb-2 font-bold leading-9 tracking-tight text-gray-900">
+				<h2 class="mb-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
 					Du bist Teilnehmer:in?
 				</h2>
-				<p class="text-gray-500 text-center">
+				<p class="text-center text-gray-500">
 					Bitte verwende die Links für Feedback und Abstimmungen, die dir von deiner Teambegleitung
 					zugesendet werden. Du kannst dich nicht direkt anmelden.
 				</p>

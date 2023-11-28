@@ -16,7 +16,7 @@ declare global {
 			username: string;
 			full_name: string;
 		};
-		type DatabaseSessionAttributes = {};
+		type DatabaseSessionAttributes = unknown;
 	}
 }
 

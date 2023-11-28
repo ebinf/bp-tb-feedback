@@ -4,7 +4,7 @@
 	};
 </script>
 
-<div class="text-center py-12 mt-8 flow-root shadow bg-white sm:rounded-lg">
+<div class="mt-8 flow-root bg-white py-12 text-center shadow sm:rounded-lg">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"
@@ -25,12 +25,12 @@
 			Bislang hat die Gruppe dir kein Feedback gegeben. Bitte warte noch einen Moment ab und stelle
 			sicher, dass du der Gruppe <a
 				href="overview"
-				class="underline font-medium hover:text-gray-600">den aktuellen Link</a
+				class="font-medium underline hover:text-gray-600">den aktuellen Link</a
 			> mitgeteilt hat.
 		{:else}
 			Die Gruppe hat dir noch kein Feedback gegeben. Bitte <a
 				href="overview"
-				class="underline font-medium hover:text-gray-600">generiere einen Link</a
+				class="font-medium underline hover:text-gray-600">generiere einen Link</a
 			> und teile ihn der Gruppe mit.
 		{/if}
 	</p>

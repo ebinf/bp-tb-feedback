@@ -22,7 +22,7 @@
 					href="/group/{group.id}"
 				>
 					<div
-						class="flex w-16 flex-shrink-0 items-center justify-center bg-primary-600 group-hover:bg-primary-500 rounded-l-md text-lg font-medium text-white"
+						class="flex w-16 flex-shrink-0 items-center justify-center rounded-l-md bg-primary-600 text-lg font-medium text-white group-hover:bg-primary-500"
 					>
 						{group.number}
 					</div>
@@ -32,9 +32,9 @@
 						<div class="flex-1 truncate px-4 py-2 text-sm">
 							<span class="font-medium text-gray-900 group-hover:text-gray-600">{group.name}</span>
 							{#if group.Feedback.length == 1}
-								<p class="text-gray-500 font-medium">Ein ungelesenes Feedback</p>
+								<p class="font-medium text-gray-500">Ein ungelesenes Feedback</p>
 							{:else if group.Feedback.length > 0}
-								<p class="text-gray-500 font-medium">
+								<p class="font-medium text-gray-500">
 									{group.Feedback.length} ungelesene Feedbacks
 								</p>
 							{:else}

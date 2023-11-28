@@ -34,7 +34,7 @@
 					<tbody class="divide-y divide-gray-200 bg-white">
 						{#each data as feedback}
 							<tr
-								class="hover:bg-gray-50 cursor-pointer focus-visible:bg-gray-100"
+								class="cursor-pointer hover:bg-gray-50 focus-visible:bg-gray-100"
 								role="link"
 								tabindex="0"
 								on:keydown={(e) => {
@@ -61,7 +61,7 @@
 									</a>
 								</td>
 								<td
-									class="whitespace-nowrap px-3 py-4 text-sm truncate max-w-3xl text-gray-500"
+									class="max-w-3xl truncate whitespace-nowrap px-3 py-4 text-sm text-gray-500"
 									class:text-gray-900={feedback.read === null}
 									class:font-medium={feedback.read === null}
 									><a href="/group/{feedback.group_id}/feedback/{feedback.id}"

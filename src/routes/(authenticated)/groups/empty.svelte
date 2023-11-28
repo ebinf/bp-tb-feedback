@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { PUBLIC_SUPPORT_ADDRESS } from '$env/static/public';
 </script>
 
@@ -20,7 +20,7 @@
 	<h3 class="mt-2 text-sm font-semibold text-gray-900">Keine Gruppen</h3>
 	<p class="mt-1 text-sm text-gray-500">
 		Du bist aktuell keinen Gruppen als Teambegleitung zugeordnet. Bitte hab noch ein wenig Geduld
-		oder <a href="mailto:{PUBLIC_SUPPORT_ADDRESS}" class="underline font-medium hover:text-gray-600"
+		oder <a href="mailto:{PUBLIC_SUPPORT_ADDRESS}" class="font-medium underline hover:text-gray-600"
 			>nimm Kontakt auf</a
 		>.
 	</p>

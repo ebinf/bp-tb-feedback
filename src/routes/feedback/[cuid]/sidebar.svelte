@@ -12,7 +12,7 @@
 				</dd>
 			</div>
 			<div class="mt-6 flex w-full flex-none gap-x-4 border-t border-gray-900/5 px-6 pt-6">
-				<dt class="flex-none flex items-center">
+				<dt class="flex flex-none items-center">
 					<svg
 						class="h-6 w-5 text-gray-400"
 						viewBox="0 0 20 20"

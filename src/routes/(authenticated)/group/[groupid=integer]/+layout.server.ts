@@ -1,5 +1,4 @@
 import { client } from '$lib/server/database';
-import { page } from '$app/stores';
 
 import type { LayoutServerLoad } from './$types';
 import { error } from '@sveltejs/kit';

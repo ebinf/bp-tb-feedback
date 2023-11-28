@@ -8,8 +8,8 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write ."
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
@@ -20,10 +20,11 @@
 		"autoprefixer": "^10.4.16",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte": "^2.30.0",
+		"eslint-plugin-svelte": "^2.35.1",
 		"postcss": "^8.4.31",
-		"prettier": "^2.8.0",
-		"prettier-plugin-svelte": "^2.10.1",
+		"prettier": "^3.1.0",
+		"prettier-plugin-svelte": "^3.1.0",
+		"prettier-plugin-tailwindcss": "^0.5.7",
 		"prisma": "^5.5.2",
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
@@ -35,8 +36,11 @@
 	"dependencies": {
 		"@lucia-auth/adapter-prisma": "^3.0.2",
 		"@prisma/client": "^5.5.2",
+		"@typescript-eslint/eslint-plugin": "^6.13.1",
+		"@typescript-eslint/parser": "^6.13.1",
 		"cuid": "^3.0.0",
 		"lucia": "^2.7.3",
+		"prisma-field-encryption": "^1.5.0",
 		"svelte-transition-classes": "^0.1.1"
 	}
 }

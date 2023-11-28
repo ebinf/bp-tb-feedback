@@ -1,4 +1,4 @@
-<div class="text-center py-12 mt-8 flow-root shadow bg-white sm:rounded-lg">
+<div class="mt-8 flow-root bg-white py-12 text-center shadow sm:rounded-lg">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"
@@ -18,7 +18,7 @@
 	<p class="mt-1 text-sm text-gray-500">
 		Du hast noch keine Stimmungsbilder erstellt. <a
 			href="polls/new"
-			class="underline font-medium hover:text-gray-600">Erstelle ein neues</a
+			class="font-medium underline hover:text-gray-600">Erstelle ein neues</a
 		> und teile den Link mit der Gruppe.
 	</p>
 </div>

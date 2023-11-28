@@ -4,7 +4,7 @@
 </script>
 
 <div class="p-4">
-	<div class="rounded-md bg-red-50 p-4 border-red-100 border">
+	<div class="rounded-md border border-red-100 bg-red-50 p-4">
 		<div class="flex">
 			<div class="flex-shrink-0">
 				<svg
@@ -35,7 +35,7 @@
 						<li>
 							Wenn das Problem weiterhin besteht, <a
 								href="mailto:{PUBLIC_SUPPORT_ADDRESS}"
-								class="underline text-red-800 hover:text-red-900 font-medium"
+								class="font-medium text-red-800 underline hover:text-red-900"
 								>nimm bitte Kontakt auf</a
 							>.
 						</li>

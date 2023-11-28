@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Notification from './notification.svelte';
 	import { notification } from './stores';
 </script>

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const colors = require('tailwindcss/colors');
+import colors from 'tailwindcss/colors';
 
 export default {
 	content: ['./src/**/*.{svelte,html,js,ts}'],
