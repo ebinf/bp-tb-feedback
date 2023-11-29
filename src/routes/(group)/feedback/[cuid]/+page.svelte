@@ -1,14 +1,14 @@
 <script lang="ts">
 	import Toast from '$lib/components/toast.svelte';
 	import Form from './form.svelte';
-	import Sidebar from './sidebar.svelte';
+	import Sidebar from '../../sidebar.svelte';
 
 	export let data;
 	export let form;
 </script>
 
 <svelte:head>
-	<title>Feedback {data.group.number}_{data.group.name}</title>
+	<title>Feedback {data.group.number}: {data.group.name}</title>
 </svelte:head>
 
 <main>

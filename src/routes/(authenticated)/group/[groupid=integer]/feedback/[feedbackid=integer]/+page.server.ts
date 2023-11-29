@@ -27,7 +27,6 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 			feedback_details: details
 		};
 	} catch (e) {
-		console.error(e);
 		if (e instanceof PrismaClientKnownRequestError && e.code === 'P2025')
 			throw error(404, 'Feedback not Found');
 		throw error(500, 'Internal Server Error');

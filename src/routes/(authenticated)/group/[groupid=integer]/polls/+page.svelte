@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/button.svelte';
 	import Empty from './empty.svelte';
+	import Table from './table.svelte';
 
 	export let data;
 </script>
@@ -14,7 +15,7 @@
 		</p>
 	</div>
 	<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-		<Button
+		<Button href="polls/new"
 			><svg
 				slot="icon"
 				xmlns="http://www.w3.org/2000/svg"
@@ -31,4 +32,8 @@
 	</div>
 </div>
 
-<Empty />
+{#if data?.polls?.length}
+	<Table polls={data.polls} />
+{:else}
+	<Empty />
+{/if}

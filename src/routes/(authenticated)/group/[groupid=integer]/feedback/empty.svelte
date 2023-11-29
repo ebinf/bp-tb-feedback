@@ -4,7 +4,7 @@
 	};
 </script>
 
-<div class="mt-8 flow-root bg-white py-12 text-center shadow sm:rounded-lg">
+<div class="mt-8 flow-root rounded-lg bg-white px-4 py-12 text-center shadow">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"

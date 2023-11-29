@@ -1,13 +1,15 @@
 <script lang="ts">
 	export let scheme: 'primary' | 'secondary' = 'primary';
+	export let href: string | null = null;
 	export let submit: boolean = false;
 	export let spinner: boolean = false;
 	export let disabled: boolean = false;
-	export let clazz: string;
+	export let clazz: string | null = null;
 	export { clazz as class };
 </script>
 
-<button
+<svelte:element
+	this={href ? 'a' : 'button'}
 	class="mt-3 inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 sm:mt-0 sm:w-auto {clazz}"
 	class:bg-primary-600={scheme === 'primary'}
 	class:hover:bg-primary-500={scheme === 'primary'}
@@ -16,8 +18,11 @@
 	class:hover:bg-gray-500={scheme === 'secondary'}
 	class:disabled:hover:bg-gray-600={scheme === 'secondary'}
 	class:disabled:opacity-80={disabled || spinner}
-	type={submit ? 'submit' : 'button'}
+	type={submit && !href ? 'submit' : 'button'}
 	disabled={disabled || spinner}
+	{href}
+	role="button"
+	tabindex="0"
 	on:click
 >
 	{#if spinner}
@@ -36,10 +41,13 @@
 		</svg>
 	{:else}
 		{#if $$slots.icon}
-			<span class="mr-1 inline-block h-5 w-5">
+			<span
+				class="-ml-0.5 mr-1.5 inline-block h-5 w-5"
+				class:text-gray-300={scheme === 'secondary'}
+			>
 				<slot name="icon" />
 			</span>
 		{/if}
 		<slot />
 	{/if}
-</button>
+</svelte:element>

@@ -36,8 +36,10 @@
 	"dependencies": {
 		"@lucia-auth/adapter-prisma": "^3.0.2",
 		"@prisma/client": "^5.5.2",
+		"@types/chart.js": "^2.9.41",
 		"@typescript-eslint/eslint-plugin": "^6.13.1",
 		"@typescript-eslint/parser": "^6.13.1",
+		"chart.js": "^4.4.0",
 		"cuid": "^3.0.0",
 		"lucia": "^2.7.3",
 		"prisma-field-encryption": "^1.5.0",

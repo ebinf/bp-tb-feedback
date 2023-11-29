@@ -6,6 +6,7 @@
 	import { page } from '$app/stores';
 	import { writable } from 'svelte/store';
 	import { title, heading } from '../../stores';
+	import type { PollRound } from '@prisma/client';
 	title.set(`Gruppe ${data?.group?.number}: ${data?.group?.name}`);
 	heading.set(
 		`<span class="text-gray-500 font-medium pr-3">${data?.group?.number} </span>${data?.group?.name}`
@@ -26,6 +27,7 @@
 		{
 			name: 'Stimmung',
 			href: `/group/${data.group?.id}/polls`,
+			polls_badge: true,
 			active: [
 				'/(authenticated)/group/[groupid=integer]/polls/new',
 				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]'
@@ -34,6 +36,7 @@
 	];
 
 	$: unread_feedback = $page.data.unread_feedback;
+	$: poll_active = $page.data.polls.some((p: PollRound) => p.open);
 
 	let mobileMenu: HTMLSelectElement;
 </script>
@@ -63,8 +66,11 @@
 						>{tab.name}
 						{#if tab.feedback_badge && unread_feedback && unread_feedback > 0}
 							&nbsp;({unread_feedback})
-						{/if}</option
-					>
+						{/if}
+						{#if tab.polls_badge && poll_active}
+							&nbsp;&#9679;
+						{/if}
+					</option>
 				{/each}
 			</select>
 		</div>
@@ -76,16 +82,31 @@
 						href={tab.href}
 						class="{$page.url.pathname === tab.href || tab.active?.includes($page.route?.id ?? '')
 							? 'border-primary-500 text-primary-600'
-							: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium"
+							: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} group flex items-center gap-x-2 whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium"
 						aria-current="page"
 						>{tab.name}
 						{#if tab.feedback_badge && unread_feedback && unread_feedback > 0}
 							<span
-								class="{$page.url.pathname.split('/').pop() === tab.href
+								class="{$page.url.pathname === tab.href ||
+								tab.active?.includes($page.route?.id ?? '')
 									? 'bg-primary-100 text-primary-700'
-									: 'bg-gray-200 text-gray-700'} ml-1 inline-flex items-center rounded px-2 py-1 text-xs font-medium"
+									: 'bg-gray-200  text-gray-700 group-hover:bg-gray-300 group-hover:text-gray-800'} inline-flex items-center rounded px-2 py-1 text-xs font-medium"
 								>{unread_feedback}</span
 							>
+						{/if}
+						{#if tab.polls_badge && poll_active}
+							<span class="self-top relative inline-flex h-2 w-2">
+								{#if $page.url.pathname === tab.href || tab.active?.includes($page.route?.id ?? '')}
+									<span
+										class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75"
+									></span>
+									<span class="relative inline-flex h-2 w-2 rounded-full bg-primary-500"></span>
+								{:else}
+									<span
+										class="relative inline-flex h-2 w-2 rounded-full bg-gray-300 group-hover:bg-gray-400"
+									></span>
+								{/if}
+							</span>
 						{/if}
 					</a>
 				{/each}

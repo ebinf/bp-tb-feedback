@@ -25,9 +25,25 @@ export const load: LayoutServerLoad = async ({ locals, params }) => {
 				timestamp: 'desc'
 			}
 		});
+		const polls = await client.pollRound.findMany({
+			where: {
+				group_id: group.id
+			},
+			orderBy: {
+				created: 'desc'
+			},
+			include: {
+				_count: {
+					select: {
+						votes: true
+					}
+				},
+			}
+		});
 		return {
 			group,
 			feedback,
+			polls,
 			unread_feedback: feedback.filter((f) => !f.read).length
 		};
 	} catch (e) {
