@@ -37,7 +37,7 @@ export const load: LayoutServerLoad = async ({ locals, params }) => {
 					select: {
 						votes: true
 					}
-				},
+				}
 			}
 		});
 		return {

@@ -112,7 +112,7 @@
 		</div>
 	</div>
 	<div class="mt-5 flex lg:ml-4 lg:mt-0">
-		<span>
+		<!-- <span>
 			<Button scheme="secondary">
 				<svg slot="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 					<path
@@ -121,7 +121,7 @@
 				</svg>
 				Bearbeiten
 			</Button>
-		</span>
+		</span> -->
 
 		<span class="ml-3">
 			<Button scheme="secondary" on:click={shareOrCopy}>

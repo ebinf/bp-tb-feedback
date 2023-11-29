@@ -2,6 +2,7 @@ import { error, type Actions, fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { client } from '$lib/server/database';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { voteEvents } from '$lib/server/eventstore';
 
 export const load: PageServerLoad = async ({ params }) => {
 	try {
@@ -86,16 +87,19 @@ export const actions: Actions = {
 				});
 			}
 
+			voteEvents.emit(`vote:${poll.group_id}:${poll.id}`);
+
 			return {
 				success: 'Deine Stimme wurde erfolgreich übermittelt. Vielen Dank dafür!'
 			};
 		} catch (e) {
+			console.log(e);
 			if (e instanceof PrismaClientKnownRequestError && e.code === 'P2025') {
-				throw fail(404, {
+				return fail(404, {
 					error: 'Dieser Stimmungsbild-Link existiert nicht.'
 				});
 			}
-			throw fail(500, {
+			return fail(500, {
 				error:
 					'Bei der Übermittlung deiner Stimme ist ein Fehler aufgetreten. Bitte versuche es erneut.'
 			});

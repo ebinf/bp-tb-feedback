@@ -77,11 +77,11 @@ export const actions: Actions = {
 			};
 		} catch (e) {
 			if (e instanceof PrismaClientKnownRequestError && e.code === 'P2025') {
-				throw fail(404, {
+				return fail(404, {
 					error: 'Dieser Feedback-Link existiert nicht.'
 				});
 			}
-			throw fail(500, {
+			return fail(500, {
 				error:
 					'Bei der Übermittlung deines Feedbacks ist ein Fehler aufgetreten. Bitte versuche es erneut.'
 			});

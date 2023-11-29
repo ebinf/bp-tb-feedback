@@ -5,7 +5,7 @@ import { fail } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth.validate();
-	if (!session) throw fail(401);
+	if (!session) return fail(401);
 	return {
 		streamed: {
 			terms: client.term.findMany({
