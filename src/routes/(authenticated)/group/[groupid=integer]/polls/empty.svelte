@@ -16,9 +16,9 @@
 
 	<h3 class="mt-2 text-sm font-semibold text-gray-900">Bisher keine Stimmungen</h3>
 	<p class="mt-1 text-sm text-gray-500">
-		Du hast noch keine Stimmungsbilder erstellt. <a
-			href="polls/new"
-			class="font-medium underline hover:text-gray-600">Erstelle ein neues</a
+		Du hast noch keine Stimmungsbilder erstellt. <button
+			on:click
+			class="font-medium underline hover:text-gray-600">Erstelle ein neues</button
 		> und teile den Link mit der Gruppe.
 	</p>
 </div>

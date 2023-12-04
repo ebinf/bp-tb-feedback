@@ -1,12 +1,5 @@
 <script lang="ts">
-	import { afterNavigate, invalidate, invalidateAll } from '$app/navigation';
-	import { onMount } from 'svelte';
-
 	export let data;
-
-	afterNavigate(() => {
-		invalidateAll();
-	});
 </script>
 
 <div class="overflow-hidden bg-white shadow sm:rounded-lg">
@@ -43,7 +36,7 @@
 			<div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 				<dt class="text-sm font-medium text-gray-900">Nachricht</dt>
 				<dd class="mt-1 grow text-sm leading-loose text-gray-700 sm:col-span-2 sm:mt-0">
-					{#each data.feedback_details?.feedback.split('\n') as line}
+					{#each data.feedback_details.feedback.split('\n') as line}
 						<p class="mb-2">{line}</p>
 					{/each}
 				</dd>

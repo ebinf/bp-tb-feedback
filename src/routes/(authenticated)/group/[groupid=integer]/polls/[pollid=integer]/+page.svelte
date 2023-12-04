@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import Button from '$lib/components/button.svelte';
-	import { comment } from 'postcss';
-	import { onMount } from 'svelte';
 	import colors from 'tailwindcss/colors';
 	import Header from './header.svelte';
 	import { Bar } from 'svelte-chartjs';
-	import { invalidate, invalidateAll } from '$app/navigation';
 
 	export let data;
+	export let form;
 
 	import { Chart, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+	import { createNotification } from '../../../../stores';
 
 	Chart.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+
+	$: if (form?.success) createNotification('', form.success, 'success');
 
 	$: chartData = {
 		labels: ['0', '1', '2', '3', '4', '5'],
@@ -32,13 +32,6 @@
 		]
 	};
 
-	onMount(() => {
-		const eventSource = new EventSource(`/group/3/polls/1/sse`);
-		eventSource.onmessage = (event) => {
-			invalidateAll();
-		};
-	});
-
 	$: votes = data.poll_details.votes;
 	$: votesCount = [0, 1, 2, 3, 4, 5].map(
 		(i) => data.poll_details.votes.filter((v) => v.vote === i).length
@@ -46,7 +39,7 @@
 	$: comments = votes.filter((v) => v.comment);
 </script>
 
-<Header poll={data.poll_details} {comments} {votes}></Header>
+<Header {form} poll={data.poll_details} {comments} {votes}></Header>
 
 <div
 	class="mt-4 grid grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-4 lg:mx-0 lg:max-w-none lg:grid-cols-3"
@@ -62,7 +55,7 @@
 				scales: { y: { ticks: { stepSize: 1 } } }
 			}}
 		/>
-		Durschschnitt: {#if votes.length === 0}0{:else}{Number(
+		Durchschnitt: {#if votes.length === 0}0{:else}{Number(
 				votes.reduce((a, b) => a + b.vote, 0) / votes.length
 			).toFixed(2)}{/if}
 	</div>

@@ -66,19 +66,20 @@ model Feedback {
   group     Group     @relation(references: [id], fields: [group_id], onDelete: Cascade)
   timestamp DateTime  @default(now())
   read      DateTime?
-  name      String?   /// @encrypted
+  name      String? /// @encrypted
   feedback  String    @db.Text /// @encrypted
 }
 
 model PollRound {
-  id       Int      @id @unique @default(autoincrement())
-  link     String   @unique @default(cuid())
-  group_id Int
-  group    Group    @relation(references: [id], fields: [group_id], onDelete: Cascade)
-  created  DateTime @default(now())
-  open     Boolean  @default(true)
-  question String
-  votes    Vote[]
+  id        Int      @id @unique @default(autoincrement())
+  link      String   @unique @default(cuid())
+  group_id  Int
+  group     Group    @relation(references: [id], fields: [group_id], onDelete: Cascade)
+  created   DateTime @default(now())
+  open      Boolean  @default(true)
+  autoClose Boolean  @default(false)
+  question  String
+  votes     Vote[]
 }
 
 model Vote {
@@ -86,5 +87,5 @@ model Vote {
   poll_round_id Int
   poll_round    PollRound @relation(references: [id], fields: [poll_round_id], onDelete: Cascade)
   vote          Int
-  comment       String?   /// @encrypted
+  comment       String? /// @encrypted
 }

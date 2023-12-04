@@ -2,8 +2,9 @@ import type { PageServerLoad } from './$types';
 import { client } from '$lib/server/database';
 import { error } from '@sveltejs/kit';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { SSEEvents } from '$lib/server/eventstore';
 
-export const load: PageServerLoad = async ({ params, parent }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	try {
 		const details = await client.feedback.findUniqueOrThrow({
 			where: {
@@ -20,10 +21,9 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 					read: new Date()
 				}
 			});
+			SSEEvents.emit(`feedback:${details.id}`);
 		}
-		const layoutData = await parent();
 		return {
-			...layoutData,
 			feedback_details: details
 		};
 	} catch (e) {

@@ -2,8 +2,18 @@
 	import Notifications from './notifications.svelte';
 	import Navbar from './navbar.svelte';
 	import { title, heading } from './stores';
+	import { onMount } from 'svelte';
+	import { invalidate } from '$app/navigation';
 
 	export let data;
+
+	onMount(() => {
+		const eventSource = new EventSource(`/sse`);
+		eventSource.onmessage = (event) => {
+			console.log(event.data);
+			invalidate(event.data);
+		};
+	});
 </script>
 
 <svelte:head>

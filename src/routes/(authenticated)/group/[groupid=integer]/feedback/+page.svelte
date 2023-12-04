@@ -11,8 +11,8 @@
 	function shareOrCopy() {
 		if (navigator.share) {
 			navigator.share({
-				title: 'Feedback-Link',
-				text: `Sende deiner Gruppe diesen Link zu, um Feedback zu erhalten: ${PUBLIC_BASE_URL}/feedback/${data.group?.feedback_link}`,
+				title: 'Feedback an eure Teambegleitung',
+				text: 'Ich freue mich über euer Feedback! Hier könnt ihr es abgeben, anonym und sicher:',
 				url: `${PUBLIC_BASE_URL}/feedback/${data.group?.feedback_link}`
 			});
 		} else {

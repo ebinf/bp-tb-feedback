@@ -33,21 +33,15 @@
 					</thead>
 					<tbody class="divide-y divide-gray-200 bg-white">
 						{#each data as feedback}
-							<tr
-								class="cursor-pointer hover:bg-gray-50 focus-visible:bg-gray-100"
-								role="link"
-								tabindex="0"
-								on:keydown={(e) => {
-									if (e.key === 'Enter')
-										goto(`/group/${feedback.group_id}/feedback/${feedback.id}`);
-								}}
-								on:click={() => goto(`/group/${feedback.group_id}/feedback/${feedback.id}`)}
-							>
+							<tr class="hover:bg-gray-50 focus-visible:bg-gray-100">
 								<td
 									class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6"
 									class:text-gray-900={feedback.read === null}
 									class:font-medium={feedback.read === null}
-									><a href="/group/{feedback.group_id}/feedback/{feedback.id}">
+									><a
+										href="/group/{feedback.group_id}/feedback/{feedback.id}"
+										class="inline-block w-full"
+									>
 										{#if feedback.name}{feedback?.name}{:else}<span class="italic">Anonym</span
 											>{/if}
 									</a>
@@ -56,7 +50,10 @@
 									class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
 									class:text-gray-900={feedback.read === null}
 									class:font-medium={feedback.read === null}
-									><a href="/group/{feedback.group_id}/feedback/{feedback.id}">
+									><a
+										href="/group/{feedback.group_id}/feedback/{feedback.id}"
+										class="inline-block w-full"
+									>
 										{feedback.timestamp.toLocaleString()} Uhr
 									</a>
 								</td>
@@ -64,8 +61,9 @@
 									class="max-w-3xl truncate whitespace-nowrap px-3 py-4 text-sm text-gray-500"
 									class:text-gray-900={feedback.read === null}
 									class:font-medium={feedback.read === null}
-									><a href="/group/{feedback.group_id}/feedback/{feedback.id}"
-										>{feedback.feedback}</a
+									><a
+										href="/group/{feedback.group_id}/feedback/{feedback.id}"
+										class="inline-block w-full">{feedback.feedback}</a
 									></td
 								>
 							</tr>

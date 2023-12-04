@@ -2,6 +2,7 @@ import { error, type Actions, fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { client } from '$lib/server/database';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { SSEEvents } from '$lib/server/eventstore';
 
 export const load: PageServerLoad = async ({ params }) => {
 	try {
@@ -61,7 +62,7 @@ export const actions: Actions = {
 				}
 			});
 
-			await client.feedback.create({
+			const info = await client.feedback.create({
 				data: {
 					name: nameEntry,
 					feedback: message.trim(),
@@ -72,6 +73,11 @@ export const actions: Actions = {
 					}
 				}
 			});
+
+			SSEEvents.registerNewEvent(`feedback:${info.id}`, `group:${group.id}`);
+			SSEEvents.emit(`group:${group.id}`);
+			SSEEvents.emit(`feedback:${info.id}`);
+
 			return {
 				success: 'Dein Feedback wurde erfolgreich übermittelt. Vielen Dank dafür!'
 			};

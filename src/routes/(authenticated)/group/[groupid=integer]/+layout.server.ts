@@ -4,7 +4,7 @@ import type { LayoutServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
-export const load: LayoutServerLoad = async ({ locals, params }) => {
+export const load: LayoutServerLoad = async ({ locals, params, depends }) => {
 	const session = await locals.auth.validate();
 	if (!session) throw error(401);
 	try {
@@ -40,6 +40,13 @@ export const load: LayoutServerLoad = async ({ locals, params }) => {
 				}
 			}
 		});
+		depends(`group:${group.id}`);
+		for (const ipoll of polls) {
+			depends(`pollRound:${ipoll.id}`);
+		}
+		for (const ifeedback of feedback) {
+			depends(`feedback:${ifeedback.id}`);
+		}
 		return {
 			group,
 			feedback,

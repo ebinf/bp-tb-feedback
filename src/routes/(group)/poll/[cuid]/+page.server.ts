@@ -2,7 +2,7 @@ import { error, type Actions, fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { client } from '$lib/server/database';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { voteEvents } from '$lib/server/eventstore';
+import { SSEEvents } from '$lib/server/eventstore';
 
 export const load: PageServerLoad = async ({ params }) => {
 	try {
@@ -76,18 +76,19 @@ export const actions: Actions = {
 				}
 			});
 
-			if (poll._count.votes + 1 >= 5) {
+			if (poll.autoClose && poll._count.votes + 1 >= 5) {
 				await client.pollRound.update({
 					where: {
 						id: poll.id
 					},
 					data: {
-						open: false
+						open: false,
+						autoClose: false
 					}
 				});
 			}
 
-			voteEvents.emit(`vote:${poll.group_id}:${poll.id}`);
+			SSEEvents.emit(`pollRound:${poll.id}`);
 
 			return {
 				success: 'Deine Stimme wurde erfolgreich übermittelt. Vielen Dank dafür!'
