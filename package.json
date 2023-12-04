@@ -45,5 +45,10 @@
 		"prisma-field-encryption": "^1.5.0",
 		"svelte-chartjs": "^3.1.2",
 		"svelte-transition-classes": "^0.1.1"
+	},
+	"overrides": {
+		"svelte-chartjs": {
+			"svelte": ">=4.x"
+		}
 	}
 }

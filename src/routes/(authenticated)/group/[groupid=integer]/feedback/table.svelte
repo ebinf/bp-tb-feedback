@@ -35,35 +35,35 @@
 						{#each data as feedback}
 							<tr class="hover:bg-gray-50 focus-visible:bg-gray-100">
 								<td
-									class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6"
+									class="p-0 text-sm text-gray-500"
 									class:text-gray-900={feedback.read === null}
 									class:font-medium={feedback.read === null}
 									><a
 										href="/group/{feedback.group_id}/feedback/{feedback.id}"
-										class="inline-block w-full"
+										class="block w-full whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6"
 									>
 										{#if feedback.name}{feedback?.name}{:else}<span class="italic">Anonym</span
 											>{/if}
 									</a>
 								</td>
 								<td
-									class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+									class="p-0 text-sm text-gray-500"
 									class:text-gray-900={feedback.read === null}
 									class:font-medium={feedback.read === null}
 									><a
 										href="/group/{feedback.group_id}/feedback/{feedback.id}"
-										class="inline-block w-full"
+										class="block w-full whitespace-nowrap px-3 py-4"
 									>
 										{feedback.timestamp.toLocaleString()} Uhr
 									</a>
 								</td>
 								<td
-									class="max-w-3xl truncate whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+									class="max-w-3xl p-0 text-sm text-gray-500"
 									class:text-gray-900={feedback.read === null}
 									class:font-medium={feedback.read === null}
 									><a
 										href="/group/{feedback.group_id}/feedback/{feedback.id}"
-										class="inline-block w-full">{feedback.feedback}</a
+										class="block w-full truncate whitespace-nowrap px-3 py-4">{feedback.feedback}</a
 									></td
 								>
 							</tr>

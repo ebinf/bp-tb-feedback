@@ -37,27 +37,32 @@
 						{#each polls as poll}
 							<tr class="hover:bg-gray-50 focus-visible:bg-gray-100">
 								<td
-									class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6"
+									class="p-0 text-sm text-gray-500"
 									class:text-gray-900={poll.open}
 									class:font-medium={poll.open}
-									><a href="/group/{poll.group_id}/polls/{poll.id}" class="inline-block w-full">
+									><a
+										href="/group/{poll.group_id}/polls/{poll.id}"
+										class="block w-full whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6"
+									>
 										{poll.created.toLocaleString()} Uhr
 									</a>
 								</td>
 								<td
-									class="max-w-3xl truncate whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+									class="max-w-3xl p-0 text-sm text-gray-500"
 									class:text-gray-900={poll.open}
 									class:font-medium={poll.open}
-									><a href="/group/{poll.group_id}/polls/{poll.id}" class="inline-block w-full"
-										>{poll.question}</a
+									><a
+										href="/group/{poll.group_id}/polls/{poll.id}"
+										class="block w-full truncate whitespace-nowrap px-3 py-4">{poll.question}</a
 									></td
 								>
 								<td
-									class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+									class="p-0 text-sm text-gray-500"
 									class:text-gray-900={poll.open}
 									class:font-medium={poll.open}
-									><a href="/group/{poll.group_id}/polls/{poll.id}" class="inline-block w-full"
-										>{poll._count.votes}</a
+									><a
+										href="/group/{poll.group_id}/polls/{poll.id}"
+										class="block w-full whitespace-nowrap px-3 py-4">{poll._count.votes}</a
 									>
 								</td>
 							</tr>

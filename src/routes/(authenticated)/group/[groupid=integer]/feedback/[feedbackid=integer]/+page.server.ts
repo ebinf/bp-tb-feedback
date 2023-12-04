@@ -13,14 +13,16 @@ export const load: PageServerLoad = async ({ params }) => {
 			}
 		});
 		if (!details.read) {
+			const now = new Date();
 			await client.feedback.update({
 				where: {
 					id: parseInt(params.feedbackid)
 				},
 				data: {
-					read: new Date()
+					read: now
 				}
 			});
+			details.read = now;
 			SSEEvents.emit(`feedback:${details.id}`);
 		}
 		return {
