@@ -13,12 +13,12 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
-		const username = formData.get('username') as string;
+		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
 
-		if (username.length < 1 || username.length > 31) {
+		if (email.length < 1 || email.length > 31) {
 			return fail(400, {
-				message: 'Der eingegebene Anmeldename ist ungültig.'
+				message: 'Die eingegebene E-Mail-Adresse ist ungültig.'
 			});
 		}
 		if (password.length < 1 || password.length > 255) {
@@ -28,7 +28,7 @@ export const actions: Actions = {
 		}
 
 		try {
-			const key = await auth.useKey('username', username.toLowerCase(), password);
+			const key = await auth.useKey('email', email.toLowerCase(), password);
 			const session = await auth.createSession({
 				userId: key.userId,
 				attributes: {}

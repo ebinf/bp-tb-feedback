@@ -34,7 +34,7 @@
 	];
 
 	export let user_data: {
-		username: string;
+		email: string;
 		full_name: string;
 	};
 
@@ -144,7 +144,7 @@
 						>
 							<div class="block px-4 py-2 text-sm">
 								<div class="font-medium text-gray-800">{user_data.full_name}</div>
-								<div class="font-medium text-gray-500">{user_data.username}</div>
+								<div class="font-medium text-gray-500">{user_data.email}</div>
 							</div>
 							{#each user_menu as entry}
 								{#if entry.href}
@@ -236,7 +236,7 @@
 				<div class="flex items-center px-4">
 					<div>
 						<div class="text-base font-medium text-gray-800">{user_data.full_name}</div>
-						<div class="text-sm font-medium text-gray-500">{user_data.username}</div>
+						<div class="text-sm font-medium text-gray-500">{user_data.email}</div>
 					</div>
 					<!-- <button
 						type="button"

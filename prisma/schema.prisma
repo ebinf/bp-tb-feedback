@@ -11,8 +11,8 @@ datasource db {
 }
 
 model User {
-  id        String @id @unique
-  username  String @unique
+  id        String  @id @unique
+  email     String @unique
   full_name String /// @encrypted
 
   auth_session Session[]

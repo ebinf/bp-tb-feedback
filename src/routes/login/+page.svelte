@@ -58,15 +58,15 @@
 			</div>
 			<form class="mt-6 space-y-6" method="POST" use:enhance>
 				<div>
-					<label for="username" class="block text-sm font-medium leading-6 text-gray-900"
-						>Anmeldename</label
+					<label for="email" class="block text-sm font-medium leading-6 text-gray-900"
+						>E-Mail-Adresse</label
 					>
 					<div class="mt-2">
 						<input
-							id="username"
-							name="username"
+							id="email"
+							name="email"
 							type="text"
-							autocomplete="username"
+							autocomplete="email"
 							required
 							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 lg:text-sm lg:leading-6"
 						/>

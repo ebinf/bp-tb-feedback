@@ -7,7 +7,7 @@ export const load: LayoutServerLoad = async ({ locals, request }) => {
 	if (!session) throw redirect(302, `/login?r=${new URL(request.url).pathname}`);
 	return {
 		userId: session.user.userId,
-		username: session.user.username,
+		email: session.user.email,
 		full_name: session.user.full_name
 	};
 };
