@@ -4,14 +4,13 @@ import type { PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals, depends }) => {
-	const session = await locals.auth.validate();
-	if (!session) return fail(401);
-	depends(`user:${session.user.userId}`);
+	if (!locals.session) return fail(401);
+	depends(`user:${locals.session.user.userId}`);
 	const terms = await client.term.findMany({
 		where: {
 			groups: {
 				some: {
-					lead_id: session.user.userId
+					lead_id: locals.session.user.userId
 				}
 			}
 		},
@@ -21,7 +20,7 @@ export const load: PageServerLoad = async ({ locals, depends }) => {
 		include: {
 			groups: {
 				where: {
-					lead_id: session.user.userId
+					lead_id: locals.session.user.userId
 				},
 				orderBy: {
 					number: 'asc'

@@ -3,12 +3,11 @@ import { SSEEvents } from '$lib/server/eventstore.js';
 import { error } from '@sveltejs/kit';
 
 export const GET = async ({ locals }) => {
-	const session = await locals.auth.validate();
-	if (!session) throw error(401, 'Not authenticated');
+	if (!locals.session) throw error(401, 'Not authenticated');
 
 	const user = await client.user.findUniqueOrThrow({
 		where: {
-			id: session.user.userId
+			id: locals.session.user.userId
 		},
 		include: {
 			Group: {

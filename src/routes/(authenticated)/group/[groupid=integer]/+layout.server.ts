@@ -5,13 +5,12 @@ import { error } from '@sveltejs/kit';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 export const load: LayoutServerLoad = async ({ locals, params, depends }) => {
-	const session = await locals.auth.validate();
-	if (!session) throw error(401);
+	if (!locals.session) throw error(401);
 	try {
 		const group = await client.group.findUniqueOrThrow({
 			where: {
 				id: parseInt(params.groupid),
-				lead_id: session.user.userId
+				lead_id: locals.session.user.userId
 			},
 			include: {
 				term: true

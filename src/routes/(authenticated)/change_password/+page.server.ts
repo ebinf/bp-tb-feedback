@@ -30,10 +30,9 @@ export const actions: Actions = {
 		}
 
 		try {
-			const session = await locals.auth.validate();
-			if (!session) throw redirect(302, '/auth/login');
-			await auth.useKey('email', session?.user.email, current_password);
-			await auth.updateKeyPassword('email', session?.user.email, new_password);
+			if (!locals.session) throw redirect(302, '/auth/login');
+			await auth.useKey('email', locals.session.user.email, current_password);
+			await auth.updateKeyPassword('email', locals.session.user.email, new_password);
 		} catch (e) {
 			if (
 				e instanceof LuciaError &&

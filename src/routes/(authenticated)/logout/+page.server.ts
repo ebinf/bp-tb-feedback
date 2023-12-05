@@ -5,17 +5,15 @@ import type { Actions } from './$types';
 
 export const actions: Actions = {
 	logout: async ({ locals }) => {
-		const session = await locals.auth.validate();
-		if (!session) return fail(401);
-		await auth.invalidateSession(session.sessionId);
+		if (!locals.session) return fail(401);
+		await auth.invalidateSession(locals.session.sessionId);
 		locals.auth.setSession(null);
 		throw redirect(302, '/login?loggedout');
 	},
 
 	logout_everywhere: async ({ locals }) => {
-		const session = await locals.auth.validate();
-		if (!session) return fail(401);
-		await auth.invalidateAllUserSessions(session.user.userId);
+		if (!locals.session) return fail(401);
+		await auth.invalidateAllUserSessions(locals.session.user.userId);
 		locals.auth.setSession(null);
 		throw redirect(302, '/login?loggedout');
 	}

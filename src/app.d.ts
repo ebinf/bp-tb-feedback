@@ -5,6 +5,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			auth: import('lucia').AuthRequest;
+			session: import('lucia').Session | null;
 		}
 		// interface PageData {}
 		// interface Platform {}
