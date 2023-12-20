@@ -3,6 +3,9 @@ import type { PageServerLoad } from './$types';
 import { client } from '$lib/server/database';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { SSEEvents } from '$lib/server/eventstore';
+import { sendMailFromTemplate } from '$lib/server/email';
+import NewFeedback from '$lib/email_templates/new_feedback.server.svelte';
+import { PUBLIC_BASE_URL } from '$env/static/public';
 
 export const load: PageServerLoad = async ({ params }) => {
 	try {
@@ -77,6 +80,18 @@ export const actions: Actions = {
 			SSEEvents.registerNewEvent(`feedback:${info.id}`, `group:${group.id}`);
 			SSEEvents.emit(`group:${group.id}`);
 			SSEEvents.emit(`feedback:${info.id}`);
+
+			await sendMailFromTemplate(
+				group.lead,
+				`Neues Feedback für Gruppe ${group.number}: ${group.name}`,
+				NewFeedback,
+				{
+					name: group.lead.full_name,
+					group_number: group.number,
+					group_name: group.name,
+					link: `${PUBLIC_BASE_URL}/group/${group.id}/feedback/${info.id}`
+				}
+			);
 
 			return {
 				success: 'Dein Feedback wurde erfolgreich übermittelt. Vielen Dank dafür!'
