@@ -10,10 +10,11 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request, locals }) => {
+	default: async ({ request, locals, url }) => {
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
+		const redirectTo = url.searchParams.get('r');
 
 		if (email.length < 1 || email.length > 31) {
 			return fail(400, {
@@ -49,6 +50,10 @@ export const actions: Actions = {
 			});
 		}
 
-		throw redirect(302, '/dashboard');
+		if (redirectTo && redirectTo.startsWith('/')) {
+			throw redirect(302, redirectTo);
+		} else {
+			throw redirect(302, '/dashboard');
+		}
 	}
 };
