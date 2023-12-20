@@ -70,6 +70,11 @@
 				line-height: 1.5rem;
 			}
 
+			.container a {
+				color: #111827;
+				font-weight: 600;
+			}
+
 			div.footer {
 				width: 70%;
 				max-width: 550px;

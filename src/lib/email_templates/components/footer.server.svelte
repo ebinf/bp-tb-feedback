@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { PUBLIC_SUPPORT_ADDRESS } from '$env/static/public';
 </script>
 

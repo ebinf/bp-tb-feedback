@@ -3,6 +3,8 @@
 	import type { LayoutData } from '../$types';
 
 	export let data: LayoutData;
+
+	$: votes = data?.polls?.reduce((acc, p) => acc + p._count.votes, 0) ?? 0;
 </script>
 
 <div>
@@ -45,9 +47,16 @@
 				</dd>
 			</div>
 		</a>
-		<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-			<dt class="truncate text-sm font-medium text-gray-500">Avg. Click Rate</dt>
-			<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">24.57%</dd>
-		</div>
+		<a
+			href="/group/{data.group?.id}/polls"
+			class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+		>
+			<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+				<dt class="truncate text-sm font-medium text-gray-500">Stimmen</dt>
+				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+					{votes}
+				</dd>
+			</div>
+		</a>
 	</dl>
 </div>

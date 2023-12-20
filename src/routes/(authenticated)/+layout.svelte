@@ -10,7 +10,6 @@
 	onMount(() => {
 		const eventSource = new EventSource(`/sse`);
 		eventSource.onmessage = (event) => {
-			console.log(event.data);
 			invalidate(event.data);
 		};
 	});

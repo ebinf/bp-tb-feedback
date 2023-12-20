@@ -25,7 +25,7 @@
 			active: ['/(authenticated)/group/[groupid=integer]/feedback/[feedbackid=integer]']
 		},
 		{
-			name: 'Stimmung',
+			name: 'Stimmungsbilder',
 			href: `/group/${data.group?.id}/polls`,
 			polls_badge: true,
 			active: [
