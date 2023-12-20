@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 
 import colors from 'tailwindcss/colors';
+import forms from '@tailwindcss/forms';
+import aspect_ratio from '@tailwindcss/aspect-ratio';
+import typography from '@tailwindcss/typography';
 
 export default {
 	content: ['./src/**/*.{svelte,html,js,ts}'],
@@ -12,9 +15,5 @@ export default {
 			}
 		}
 	},
-	plugins: [
-		require('@tailwindcss/forms'),
-		require('@tailwindcss/aspect-ratio'),
-		require('@tailwindcss/typography')
-	]
+	plugins: [forms, aspect_ratio, typography]
 };

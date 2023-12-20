@@ -1,5 +1,12 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
+
 	export let data;
+
+	onMount(async () => {
+		if (data.invalidate) invalidate(`feedback:${data.feedback_details.id}`);
+	});
 </script>
 
 <div class="overflow-hidden bg-white shadow sm:rounded-lg">

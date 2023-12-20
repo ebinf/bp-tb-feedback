@@ -6,6 +6,7 @@ import { SSEEvents } from '$lib/server/eventstore';
 
 export const load: PageServerLoad = async ({ params }) => {
 	try {
+		let invalidate = false;
 		const details = await client.feedback.findUniqueOrThrow({
 			where: {
 				id: parseInt(params.feedbackid),
@@ -24,9 +25,11 @@ export const load: PageServerLoad = async ({ params }) => {
 			});
 			details.read = now;
 			SSEEvents.emit(`feedback:${details.id}`);
+			invalidate = true;
 		}
 		return {
-			feedback_details: details
+			feedback_details: details,
+			invalidate
 		};
 	} catch (e) {
 		if (e instanceof PrismaClientKnownRequestError && e.code === 'P2025')

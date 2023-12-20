@@ -34,8 +34,8 @@
 	];
 
 	export let user_data: {
-		email: string;
-		full_name: string;
+		email: string | undefined;
+		full_name: string | undefined;
 	};
 
 	let userMenuShown = false;
