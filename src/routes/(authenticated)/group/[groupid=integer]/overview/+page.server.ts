@@ -1,6 +1,6 @@
 import { client } from '$lib/server/database';
 import { error, type Actions, fail } from '@sveltejs/kit';
-import cuid from 'cuid';
+import { createId } from '@paralleldrive/cuid2';
 
 export const actions: Actions = {
 	regenerate_feedback_link: async ({ locals, params }) => {
@@ -13,7 +13,7 @@ export const actions: Actions = {
 					lead_id: locals.session.user.userId
 				},
 				data: {
-					feedback_link: cuid()
+					feedback_link: createId()
 				}
 			});
 			return {
