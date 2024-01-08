@@ -1,5 +1,5 @@
 <script lang="ts">
-	import classes from 'svelte-transition-classes';
+	import { classes } from 'svelte-transition-classes';
 	import { page } from '$app/stores';
 	import { PUBLIC_SITE_NAME } from '$env/static/public';
 

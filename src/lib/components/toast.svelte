@@ -1,6 +1,5 @@
 <script lang="ts">
-	import classes from 'svelte-transition-classes';
-	import { fade } from 'svelte/transition';
+	import { classes } from 'svelte-transition-classes';
 
 	let show = true;
 

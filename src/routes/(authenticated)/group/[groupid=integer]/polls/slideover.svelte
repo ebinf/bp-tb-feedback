@@ -3,7 +3,7 @@
 	import Button from '$lib/components/button.svelte';
 	import Toast from '$lib/components/toast.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import classes from 'svelte-transition-classes';
+	import { classes } from 'svelte-transition-classes';
 	import type { ActionData } from './[pollid=integer]/$types';
 
 	let pollTitleFocus = false;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import classes from 'svelte-transition-classes';
+	import { classes } from 'svelte-transition-classes';
 
 	export let style: 'danger' | 'success' = 'danger';
 	export let shown = true;
