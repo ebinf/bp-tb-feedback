@@ -3,7 +3,6 @@
 	import { Head, Html } from 'svelte-email';
 	import Container from '../components/container.server.svelte';
 	import Footer from '../components/footer.server.svelte';
-	import colors from 'tailwindcss/colors';
 
 	export let title: string = PUBLIC_SITE_NAME;
 	export let group_number: string | number | null = null;
