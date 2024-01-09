@@ -16,7 +16,7 @@ export const actions: Actions = {
 		const password = formData.get('password') as string;
 		const redirectTo = url.searchParams.get('r');
 
-		if (email.length < 1 || email.length > 31) {
+		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 			return fail(400, {
 				message: 'Die eingegebene E-Mail-Adresse ist ungültig.'
 			});
