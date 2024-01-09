@@ -147,8 +147,8 @@
 							}}
 						>
 							<div class="block px-4 py-2 text-sm">
-								<div class="font-medium text-gray-800">{user_data.full_name}</div>
-								<div class="font-medium text-gray-500">{user_data.email}</div>
+								<div class="whitespace-nowrap font-medium text-gray-800">{user_data.full_name}</div>
+								<div class="whitespace-nowrap font-medium text-gray-500">{user_data.email}</div>
 							</div>
 							{#each user_menu as entry}
 								{#if entry.href}
@@ -266,13 +266,25 @@
 				</div>
 				<div class="mt-3 space-y-1">
 					{#each user_menu as entry}
-						<a
-							href={entry.href}
-							class="{$page?.url?.pathname === entry.href
-								? 'border-primary-500 bg-primary-50 text-primary-700'
-								: 'border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-100 hover:text-gray-800'}  block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
-							on:click={() => (mobileMenuShown = false)}>{entry.name}</a
-						>
+						{#if entry.href}
+							<a
+								href={entry.href}
+								class="{$page?.url?.pathname === entry.href
+									? 'border-primary-500 bg-primary-50 text-primary-700'
+									: 'border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-100 hover:text-gray-800'} block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
+								on:click={() => (mobileMenuShown = false)}>{entry.name}</a
+							>
+						{:else if entry.form}
+							<form method="POST" action={entry.form}>
+								<button
+									class="{$page?.url?.pathname === entry.href
+										? 'border-primary-500 bg-primary-50 text-primary-700'
+										: 'border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-100 hover:text-gray-800'} block w-full border-l-4 py-2 pl-3 pr-4 text-left text-base font-medium"
+								>
+									{entry.name}
+								</button>
+							</form>
+						{/if}
 					{/each}
 				</div>
 			</div>

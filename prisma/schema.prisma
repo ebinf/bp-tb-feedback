@@ -11,13 +11,23 @@ datasource db {
 }
 
 model User {
-  id        String  @id @unique
+  id        String @id @unique
   email     String @unique
   full_name String /// @encrypted
 
-  auth_session Session[]
-  key          Key[]
-  Group        Group[]
+  auth_session        Session[]
+  key                 Key[]
+  Group               Group[]
+  PasswordResetTokens PasswordResetTokens[]
+}
+
+model PasswordResetTokens {
+  id      String @id @unique
+  user_id String
+  user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  expires DateTime
+
+  @@index([user_id])
 }
 
 model Session {
