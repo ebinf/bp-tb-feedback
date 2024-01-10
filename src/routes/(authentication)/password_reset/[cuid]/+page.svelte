@@ -36,8 +36,6 @@
 				>
 			{:else if form?.message}
 				<Toast style="fail">{form.message}</Toast>
-			{:else if form?.success}
-				<Toast style="success">{form.success}</Toast>
 			{/if}
 		</div>
 		<form

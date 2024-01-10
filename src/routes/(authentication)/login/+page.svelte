@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import Toast from '$lib/components/toast.svelte';
 	import Modal from '$lib/components/modal.svelte';
+	import Button from '$lib/components/button.svelte';
 
 	export let form;
 
@@ -23,7 +24,7 @@
 </svelte:head>
 
 <div
-	class="mx-auto grid w-full grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-x md:divide-y-0 lg:w-2/3 xl:w-1/2"
+	class="mx-auto grid w-full grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-x md:divide-y-0 lg:w-2/3 xl:w-3/5"
 >
 	<div class="py-6 md:px-6 md:py-0">
 		<div class="mb-4">
@@ -114,11 +115,11 @@
 			</div>
 
 			<div>
-				<button
-					type="submit"
-					disabled={formSubmitting}
-					class="flex w-full justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 disabled:bg-primary-500 disabled:opacity-90"
-					>Anmelden</button
+				<Button
+					class="flex w-full justify-center leading-6 sm:w-full"
+					submit={true}
+					spinner={formSubmitting}
+					scheme="primary">Anmelden</Button
 				>
 			</div>
 		</form>

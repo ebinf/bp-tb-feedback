@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let scheme: 'primary' | 'secondary' | 'white' = 'primary';
+	export let scheme: 'primary' | 'secondary' | 'white' | 'danger' = 'primary';
 	export let href: string | null = null;
 	export let submit: boolean = false;
 	export let spinner: boolean = false;
@@ -11,7 +11,7 @@
 <svelte:element
 	this={href ? 'a' : 'button'}
 	class="mt-3 inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 sm:mt-0 sm:w-auto {clazz}"
-	class:text-white={scheme === 'primary' || scheme === 'secondary'}
+	class:text-white={scheme === 'primary' || scheme === 'secondary' || scheme === 'danger'}
 	class:bg-primary-600={scheme === 'primary'}
 	class:hover:bg-primary-500={scheme === 'primary'}
 	class:disabled:hover:bg-primary-600={scheme === 'primary'}
@@ -25,6 +25,9 @@
 	class:bg-white={scheme === 'white'}
 	class:hover:bg-gray-50={scheme === 'white'}
 	class:disabled:hover:bg-gray-100={scheme === 'white'}
+	class:bg-red-600={scheme === 'danger'}
+	class:hover:bg-red-500={scheme === 'danger'}
+	class:disabled:hover:bg-red-600={scheme === 'danger'}
 	class:disabled:opacity-80={disabled || spinner}
 	type={submit && !href ? 'submit' : 'button'}
 	disabled={disabled || spinner}

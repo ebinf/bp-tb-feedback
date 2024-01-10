@@ -29,7 +29,7 @@
 	const user_menu = [
 		{
 			name: 'Passwort ändern',
-			href: '/change_password'
+			href: '/settings'
 		},
 		{
 			name: 'Abmelden',
