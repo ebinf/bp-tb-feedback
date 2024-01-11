@@ -4,6 +4,7 @@ import { error, fail, redirect } from '@sveltejs/kit';
 
 import type { Actions, PageServerLoad } from './$types';
 import { SSEEvents } from '$lib/server/eventstore';
+import { client } from '$lib/server/database';
 
 export const load: PageServerLoad = async ({ locals, depends }) => {
 	if (!locals.session) throw error(401);
@@ -83,9 +84,25 @@ export const actions: Actions = {
 		}
 
 		try {
+			const groups = await client.group.findMany({
+				where: {
+					lead_id: locals.session.user.userId
+				}
+			});
+
 			await auth.useKey('email', locals.session.user.email, password);
 			await auth.invalidateAllUserSessions(locals.session.user.userId);
 			await auth.deleteUser(locals.session.user.userId);
+
+			SSEEvents.emit(`user:${locals.session.user_id}`);
+			SSEEvents.emit('admin:users');
+
+			if (groups.length > 0) {
+				groups.forEach((group) => {
+					SSEEvents.emit(`group:${group.id}`);
+				});
+				SSEEvents.emit('admin:groups');
+			}
 		} catch (e) {
 			if (
 				e instanceof LuciaError &&
@@ -99,9 +116,6 @@ export const actions: Actions = {
 				error: 'Es ist ein unbekannter Fehler aufgetreten.'
 			});
 		}
-
-		SSEEvents.emit(`user:${locals.session.user_id}`);
-		SSEEvents.emit('admin:users');
 
 		throw redirect(302, '/login?deleted');
 	}

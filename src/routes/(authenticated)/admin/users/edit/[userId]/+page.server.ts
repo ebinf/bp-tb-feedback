@@ -162,8 +162,14 @@ export const actions: Actions = {
 		};
 	},
 
-	delete: async ({ params }) => {
+	delete: async ({ params, locals }) => {
 		const userId = params.userId as string;
+
+		if (userId == locals.session?.user.userId) {
+			return fail(400, {
+				error: 'Du kannst dein eigenes Konto nicht löschen.'
+			});
+		}
 
 		try {
 			const groups = await client.group.findMany({
@@ -182,10 +188,10 @@ export const actions: Actions = {
 			SSEEvents.emit('admin:users');
 
 			if (groups.length > 0) {
-				SSEEvents.emit('admin:groups');
 				groups.forEach((group) => {
 					SSEEvents.emit(`group:${group.id}`);
 				});
+				SSEEvents.emit('admin:groups');
 			}
 		} catch (e) {
 			return fail(500, {
