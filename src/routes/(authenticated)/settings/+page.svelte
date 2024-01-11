@@ -52,7 +52,7 @@
 							value={data.first_name}
 							required
 							readonly
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 read-only:bg-gray-50 read-only:text-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
+							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 read-only:bg-gray-50 read-only:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
 				</div>
@@ -70,7 +70,7 @@
 							value={data.last_name}
 							required
 							readonly
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 read-only:bg-gray-50 read-only:text-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
+							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 read-only:bg-gray-50 read-only:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
 				</div>
@@ -88,7 +88,7 @@
 							value={data.email}
 							required
 							readonly
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 read-only:bg-gray-50 read-only:text-gray-700 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
+							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 read-only:bg-gray-50 read-only:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
 				</div>
@@ -100,7 +100,8 @@
 		<div>
 			<h2 class="text-base font-semibold leading-7 text-gray-900">Passwort ändern</h2>
 			<p class="mt-1 text-sm leading-6 text-gray-700">
-				Hier kannst du das Passwort für deinen Zugang ändern.
+				Hier kannst du das Passwort für deinen Zugang ändern. Das Passwort muss mindestens 10
+				Zeichen lang sein.
 			</p>
 		</div>
 
@@ -145,6 +146,8 @@
 							type="password"
 							autocomplete="new-password"
 							disabled={changePasswordSubmitting}
+							minlength="10"
+							maxlength="255"
 							required
 							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
 						/>
@@ -162,6 +165,8 @@
 							type="password"
 							autocomplete="new-password"
 							disabled={changePasswordSubmitting}
+							minlength="10"
+							maxlength="255"
 							required
 							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
 						/>

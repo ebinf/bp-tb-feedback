@@ -1,10 +1,10 @@
 import { client } from '$lib/server/database';
 
 import type { PageServerLoad } from './$types';
-import { fail } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals, depends }) => {
-	if (!locals.session) return fail(401);
+	if (!locals.session) throw error(401);
 	depends(`user:${locals.session.user.userId}`);
 	const terms = await client.term.findMany({
 		where: {

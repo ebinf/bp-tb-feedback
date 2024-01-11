@@ -1,21 +1,26 @@
 import { auth } from '$lib/server/lucia';
 import { LuciaError } from 'lucia';
-import { fail, redirect } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 
 import type { Actions, PageServerLoad } from './$types';
+import { SSEEvents } from '$lib/server/eventstore';
 
-export const load: PageServerLoad = async ({ request, locals }) => {
-	if (!locals.session) throw redirect(302, '/login');
+export const load: PageServerLoad = async ({ locals, depends }) => {
+	if (!locals.session) throw error(401);
+	depends(`user:${locals.session.user.userId}`);
 	const split_name = locals.session.user.full_name.split(' ', 2);
 	return {
 		first_name: split_name[0],
 		last_name: split_name[1],
+		email: locals.session.user.email,
 		sessions: (await auth.getAllUserSessions(locals.session.user.userId)).length
 	};
 };
 
 export const actions: Actions = {
 	change_password: async ({ request, locals }) => {
+		if (!locals.session) throw error(401);
+
 		const formData = await request.formData();
 		const current_password = formData.get('current_password') as string;
 		const new_password = formData.get('new_password') as string;
@@ -40,7 +45,6 @@ export const actions: Actions = {
 		}
 
 		try {
-			if (!locals.session) throw redirect(302, '/auth/login');
 			await auth.useKey('email', locals.session.user.email, current_password);
 			await auth.updateKeyPassword('email', locals.session.user.email, new_password);
 		} catch (e) {
@@ -57,6 +61,8 @@ export const actions: Actions = {
 			});
 		}
 
+		SSEEvents.emit(`user:${locals.session.user_id}`);
+
 		return {
 			success:
 				'Das Passwort wurde erfolgreich geändert. Ab jetzt kannst du dich mit dem neuen Passwort anmelden.'
@@ -64,6 +70,8 @@ export const actions: Actions = {
 	},
 
 	delete_account: async ({ request, locals }) => {
+		if (!locals.session) throw error(401);
+
 		const formData = await request.formData();
 		const password = formData.get('delete_password') as string;
 
@@ -75,8 +83,8 @@ export const actions: Actions = {
 		}
 
 		try {
-			if (!locals.session) throw redirect(302, '/auth/login');
 			await auth.useKey('email', locals.session.user.email, password);
+			await auth.invalidateAllUserSessions(locals.session.user.userId);
 			await auth.deleteUser(locals.session.user.userId);
 		} catch (e) {
 			if (
@@ -91,6 +99,9 @@ export const actions: Actions = {
 				error: 'Es ist ein unbekannter Fehler aufgetreten.'
 			});
 		}
+
+		SSEEvents.emit(`user:${locals.session.user_id}`);
+		SSEEvents.emit('admin:users');
 
 		throw redirect(302, '/login?deleted');
 	}

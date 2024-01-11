@@ -5,6 +5,7 @@
 	export let spinner: boolean = false;
 	export let disabled: boolean = false;
 	export let clazz: string | null = null;
+	export let title: string | null = null;
 	export { clazz as class };
 </script>
 
@@ -32,13 +33,16 @@
 	type={submit && !href ? 'submit' : 'button'}
 	disabled={disabled || spinner}
 	{href}
+	{title}
 	role="button"
 	tabindex="0"
 	on:click
 >
 	{#if spinner}
 		<svg
-			class="h-5 w-5 animate-spin text-white"
+			class="h-5 w-5 animate-spin"
+			class:text-white={scheme === 'primary' || scheme === 'secondary' || scheme === 'danger'}
+			class:text-gray-900={scheme === 'white'}
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"

@@ -289,7 +289,6 @@
 														<div class="flex h-6 items-center">
 															<input
 																id="autoclose"
-																aria-describedby="comments-description"
 																name="autoclose"
 																type="checkbox"
 																class="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-600 disabled:bg-gray-100 disabled:text-gray-300 disabled:checked:bg-gray-300"

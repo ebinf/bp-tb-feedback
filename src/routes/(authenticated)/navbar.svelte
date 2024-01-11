@@ -3,7 +3,13 @@
 	import { page } from '$app/stores';
 	import { PUBLIC_SITE_NAME } from '$env/static/public';
 
-	const menu_entries = [
+	export let user_data: {
+		email: string | undefined;
+		full_name: string | undefined;
+		is_admin: boolean | undefined;
+	};
+
+	$: menu_entries = [
 		{
 			name: 'Dashboard',
 			href: '/dashboard'
@@ -23,7 +29,23 @@
 		{
 			name: 'Einstellungen',
 			href: '/settings'
-		}
+		},
+		...(user_data.is_admin
+			? [
+					{
+						name: 'Verwaltung',
+						href: '/admin',
+						active: [
+							'/(authenticated)/admin/overview',
+							'/(authenticated)/admin/groups',
+							'/(authenticated)/admin/terms',
+							'/(authenticated)/admin/users',
+							'/(authenticated)/admin/users/create',
+							'/(authenticated)/admin/users/edit/[userId]'
+						]
+					}
+				]
+			: [])
 	];
 
 	const user_menu = [
@@ -36,11 +58,6 @@
 			form: '/logout?/logout'
 		}
 	];
-
-	export let user_data: {
-		email: string | undefined;
-		full_name: string | undefined;
-	};
 
 	let userMenuShown = false;
 	let mobileMenuShown = false;

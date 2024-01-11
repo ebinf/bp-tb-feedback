@@ -3,7 +3,7 @@ import { SSEEvents } from '$lib/server/eventstore.js';
 import { error } from '@sveltejs/kit';
 
 export const GET = async ({ locals }) => {
-	if (!locals.session) throw error(401, 'Not authenticated');
+	if (!locals.session) throw error(401);
 
 	const user = await client.user.findUniqueOrThrow({
 		where: {
@@ -31,6 +31,11 @@ export const GET = async ({ locals }) => {
 			events.add(`pollRound:${poll.id}`);
 		});
 	});
+	if (user.admin) {
+		events.add('admin:terms');
+		events.add('admin:users');
+		events.add('admin:groups');
+	}
 
 	const stream = new ReadableStream<string>({
 		start(controller) {

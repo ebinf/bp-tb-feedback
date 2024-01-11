@@ -16,6 +16,7 @@ declare global {
 		type DatabaseUserAttributes = {
 			email: string;
 			full_name: string;
+			admin: boolean;
 		};
 		type DatabaseSessionAttributes = unknown;
 	}

@@ -14,6 +14,7 @@ model User {
   id        String @id @unique
   email     String @unique
   full_name String /// @encrypted
+  admin     Boolean @default(false)
 
   auth_session        Session[]
   key                 Key[]

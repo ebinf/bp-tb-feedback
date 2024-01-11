@@ -11,6 +11,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 		if (!session) {
 			throw redirect(302, `/login?r=${new URL(event.request.url).pathname}`);
 		}
+
+		if (event.route.id?.startsWith('/(authenticated)/admin')) {
+			if (!session.user.admin) {
+				throw redirect(302, `/`);
+			}
+		}
 	}
 
 	return await resolve(event);

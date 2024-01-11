@@ -4,8 +4,12 @@ import type { Actions, PageServerLoad } from './$types';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/server/lucia';
 import { LuciaError } from 'lucia';
+import { isWithinExpiration } from 'lucia/utils';
+import { SSEEvents } from '$lib/server/eventstore';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
+	if (locals.session) throw redirect(302, `/dashboard`);
+
 	const resetToken = await client.passwordResetTokens.findUnique({
 		where: {
 			id: params.cuid
@@ -57,7 +61,8 @@ export const actions: Actions = {
 				}
 			});
 
-			if (resetToken.expires < new Date()) {
+			// Check if token already expired with an hour of overdue period
+			if (!isWithinExpiration(resetToken.expires.valueOf() + 1000 * 60 * 60)) {
 				await client.passwordResetTokens.delete({
 					where: {
 						id: resetToken.id
@@ -90,6 +95,8 @@ export const actions: Actions = {
 					id: resetToken.id
 				}
 			});
+
+			SSEEvents.emit(`user:${resetToken.user_id}`);
 		} catch (e) {
 			console.log(e);
 

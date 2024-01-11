@@ -23,7 +23,8 @@
 				Passwort zurücksetzen
 			</h2>
 			<p class="text-center text-gray-500">
-				Gib hier ein neues Passwort ein, um den Zugang zu deinem Account zurückzusetzen.
+				Gib hier ein neues Passwort ein, um den Zugang zu deinem Account zurückzusetzen. Das
+				Passwort sollte mindestens 10 Zeichen lang sein.
 			</p>
 		</div>
 		<div>
@@ -59,6 +60,8 @@
 						name="new_password"
 						type="password"
 						autocomplete="new-password"
+						minlength="10"
+						maxlength="255"
 						required
 						disabled={formSubmitting || disabled}
 						class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 disabled:bg-gray-50 lg:text-sm lg:leading-6"
@@ -78,6 +81,8 @@
 						name="repeat_password"
 						type="password"
 						autocomplete="new-password"
+						minlength="10"
+						maxlength="255"
 						required
 						disabled={formSubmitting || disabled}
 						class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 disabled:bg-gray-50 lg:text-sm lg:leading-6"
