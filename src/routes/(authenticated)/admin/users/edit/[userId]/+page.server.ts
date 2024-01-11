@@ -121,9 +121,7 @@ export const actions: Actions = {
 		SSEEvents.emit('admin:users');
 		SSEEvents.emit(`user:${userId}`);
 
-		return {
-			success: 'Das Konto wurde erfolgreich bearbeitet.'
-		};
+		throw redirect(302, '/admin/users?edited');
 	},
 
 	resend_welcome_mail: async ({ params }) => {
@@ -157,9 +155,7 @@ export const actions: Actions = {
 			});
 		}
 
-		return {
-			success: 'Die E-Mail wurde erfolgreich versendet.'
-		};
+		throw redirect(302, '/admin/users?welcome_mail_sent');
 	},
 
 	delete: async ({ params, locals }) => {

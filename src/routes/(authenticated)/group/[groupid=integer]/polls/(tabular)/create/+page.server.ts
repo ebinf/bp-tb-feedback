@@ -3,7 +3,7 @@ import { SSEEvents } from '$lib/server/eventstore';
 import { fail, type Actions, redirect } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	create: async ({ params, request }) => {
+	default: async ({ params, request }) => {
 		const formData = await request.formData();
 		const question = formData.get('question') as string;
 		const state = formData.get('state') as string;
@@ -55,6 +55,7 @@ export const actions: Actions = {
 				error: 'Interner Serverfehler'
 			});
 		}
-		throw redirect(302, `/group/${groupid}/polls/${id}`);
+
+		throw redirect(302, `/group/${groupid}/polls/${id}?created`);
 	}
 };

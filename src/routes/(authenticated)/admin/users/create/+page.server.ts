@@ -1,4 +1,4 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { auth } from '$lib/server/lucia';
 import { generateRandomString } from 'lucia/utils';
@@ -69,9 +69,6 @@ export const actions: Actions = {
 
 		SSEEvents.emit('admin:users');
 
-		return {
-			success:
-				'Das Konto wurde erfolgreich erstellt. Die Nutzerin beziehungsweise der Nutzer kann sich jetzt anmelden.'
-		};
+		throw redirect(302, '/admin/users?created');
 	}
 };

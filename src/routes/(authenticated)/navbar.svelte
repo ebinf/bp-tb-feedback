@@ -21,9 +21,10 @@
 				'/(authenticated)/group/[groupid=integer]/overview',
 				'/(authenticated)/group/[groupid=integer]/feedback',
 				'/(authenticated)/group/[groupid=integer]/feedback/[feedbackid=integer]',
-				'/(authenticated)/group/[groupid=integer]/polls',
-				'/(authenticated)/group/[groupid=integer]/polls/new',
-				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]'
+				'/(authenticated)/group/[groupid=integer]/polls/(tabular)',
+				'/(authenticated)/group/[groupid=integer]/polls/(tabular)/create',
+				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]',
+				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]/edit'
 			]
 		},
 		{

@@ -29,8 +29,10 @@
 			href: `/group/${data.group?.id}/polls`,
 			polls_badge: true,
 			active: [
-				'/(authenticated)/group/[groupid=integer]/polls/new',
-				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]'
+				'/(authenticated)/group/[groupid=integer]/polls/(tabular)',
+				'/(authenticated)/group/[groupid=integer]/polls/(tabular)/create',
+				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]',
+				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]/edit'
 			]
 		}
 	];

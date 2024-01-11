@@ -3,19 +3,10 @@
 	import Button from '$lib/components/button.svelte';
 	import Toast from '$lib/components/toast.svelte';
 	import { classes } from 'svelte-transition-classes';
-	import { createNotification } from '../../../../stores';
-	import { goto } from '$app/navigation';
 	import Modal from '$lib/components/modal.svelte';
 
 	export let data;
 	export let form;
-
-	$: {
-		if (form?.success) {
-			createNotification(form.success, 'Nutzer:in bearbeiten', 'success');
-			goto('/admin/users');
-		}
-	}
 
 	let editFormSubmitting: boolean = false;
 	let resendWelcomeMailFormSubmitting: boolean = false;

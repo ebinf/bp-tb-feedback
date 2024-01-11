@@ -1,3 +1,7 @@
+<script lang="ts">
+	export let createLink: string;
+</script>
+
 <div class="mt-8 flow-root rounded-lg bg-white px-4 py-12 text-center shadow">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -16,9 +20,9 @@
 
 	<h3 class="mt-2 text-sm font-semibold text-gray-900">Bisher keine Stimmungen</h3>
 	<p class="mt-1 text-sm text-gray-500">
-		Du hast noch keine Stimmungsbilder erstellt. <button
-			on:click
-			class="font-medium underline hover:text-gray-600">Erstelle ein neues</button
+		Du hast noch keine Stimmungsbilder erstellt. <a
+			class="font-medium underline hover:text-gray-600"
+			href={createLink}>Erstelle ein neues</a
 		> und teile den Link mit der Gruppe.
 	</p>
 </div>

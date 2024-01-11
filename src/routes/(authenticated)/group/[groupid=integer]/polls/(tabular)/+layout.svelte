@@ -2,25 +2,9 @@
 	import Button from '$lib/components/button.svelte';
 	import Empty from './empty.svelte';
 	import Table from './table.svelte';
-	import Slideover from './slideover.svelte';
 
 	export let data;
-	export let form;
-
-	let slideover = false;
 </script>
-
-<Slideover
-	{form}
-	shown={slideover}
-	edit={false}
-	on:cancelled={() => {
-		slideover = false;
-	}}
-	on:success={() => {
-		slideover = false;
-	}}
-/>
 
 <div class="sm:flex sm:items-center">
 	<div class="sm:flex-auto">
@@ -31,7 +15,7 @@
 		</p>
 	</div>
 	<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-		<Button on:click={() => (slideover = true)}
+		<Button href="/group/{data.group?.id}/polls/create"
 			><svg
 				slot="icon"
 				xmlns="http://www.w3.org/2000/svg"
@@ -51,5 +35,7 @@
 {#if data?.polls?.length}
 	<Table polls={data.polls} />
 {:else}
-	<Empty on:click={() => (slideover = true)} />
+	<Empty createLink="/group/{data.group?.id}/polls/create" />
 {/if}
+
+<slot />

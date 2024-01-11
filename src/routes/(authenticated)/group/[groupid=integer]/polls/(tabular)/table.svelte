@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-
 	export let polls: {
 		id: number;
 		group_id: number;

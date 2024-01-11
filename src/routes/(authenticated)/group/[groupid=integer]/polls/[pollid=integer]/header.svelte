@@ -3,15 +3,10 @@
 	import { PUBLIC_BASE_URL } from '$env/static/public';
 	import Button from '$lib/components/button.svelte';
 	import type { PollRound, Vote } from '@prisma/client';
-	import Slideover from '../slideover.svelte';
-	import type { ActionData } from './$types';
 
-	export let form: ActionData;
 	export let poll: PollRound & { votes: Vote[] };
 	export let votes: Vote[];
 	export let comments: Vote[];
-
-	let slideOverShown = false;
 
 	let copiedText = false;
 
@@ -118,7 +113,7 @@
 	</div>
 	<div class="mt-5 flex lg:ml-4 lg:mt-0">
 		<span>
-			<Button scheme="secondary" on:click={() => (slideOverShown = true)}>
+			<Button scheme="secondary" href="{poll.id}/edit">
 				<svg slot="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 					<path
 						d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z"
@@ -185,15 +180,3 @@
 		</span>
 	</div>
 </div>
-
-<Slideover
-	{form}
-	shown={slideOverShown}
-	edit={true}
-	pollTitle={poll.question}
-	open={poll.open}
-	autoClose={poll.autoClose}
-	action="?/edit"
-	on:cancelled={() => (slideOverShown = false)}
-	on:success={() => (slideOverShown = false)}
-></Slideover>
