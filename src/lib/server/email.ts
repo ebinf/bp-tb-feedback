@@ -5,7 +5,8 @@ import {
 	EMAIL_SECURE,
 	EMAIL_USER,
 	EMAIL_PASSWORD,
-	EMAIL_REPLY_TO
+	EMAIL_REPLY_TO,
+	EMAIL_FROM
 } from '$env/static/private';
 import { PUBLIC_SITE_NAME } from '$env/static/public';
 import type { ComponentProps, ComponentType, SvelteComponent } from 'svelte';
@@ -34,7 +35,7 @@ transporter
 	});
 
 export const messageConfig = {
-	from: `"${PUBLIC_SITE_NAME}" <${EMAIL_USER}>`,
+	from: `"${PUBLIC_SITE_NAME}" <${EMAIL_FROM}>`,
 	replyTo: EMAIL_REPLY_TO
 };
 
