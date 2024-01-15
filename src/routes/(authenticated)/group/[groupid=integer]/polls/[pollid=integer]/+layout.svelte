@@ -56,9 +56,9 @@
 			}}
 		/>
 	</div>
-	<div class="flow-root rounded-lg bg-white px-4 shadow">
-		<dl class="divide-y divide-gray-100">
-			<div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+	<div class="flow-root rounded-lg bg-white shadow">
+		<dl class="grid grid-cols-2 divide-x divide-gray-100 sm:grid-cols-1 sm:divide-y">
+			<div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
 				<dt class="text-sm font-medium leading-6 text-gray-900">Durchschnitt</dt>
 				<dd class="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
 					{#if votes.length === 0}0{:else}{Number(
@@ -66,7 +66,7 @@
 						).toFixed(2)}{/if}
 				</dd>
 			</div>
-			<div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+			<div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
 				<dt class="text-sm font-medium leading-6 text-gray-900">Zustimmung</dt>
 				<dd class="mt-1 flex text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
 					{#if votes.length === 0}0&nbsp;%{:else}{Number(

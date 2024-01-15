@@ -9,7 +9,11 @@ export const load: LayoutServerLoad = async ({ depends }) => {
 				id: 'asc'
 			},
 			include: {
-				Group: true
+				_count: {
+					select: {
+						Group: true
+					}
+				}
 			}
 		})
 	};

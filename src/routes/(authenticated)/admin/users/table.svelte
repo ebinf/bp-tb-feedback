@@ -66,8 +66,8 @@
 									><a
 										href="/admin/users/edit/{user.id}"
 										class="block w-full whitespace-nowrap px-3 py-4"
-										>{user.Group.length}
-										{user.Group.length === 1 ? 'Gruppe' : 'Gruppen'}</a
+										>{user._count.Group}
+										{user._count.Group === 1 ? 'Gruppe' : 'Gruppen'}</a
 									>
 								</td>
 							</tr>
