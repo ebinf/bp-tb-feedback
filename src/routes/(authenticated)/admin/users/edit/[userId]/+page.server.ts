@@ -79,8 +79,6 @@ export const actions: Actions = {
 			});
 		}
 
-		console.log(admin);
-
 		if (admin != 'on' && userId == locals.session?.user.userId) {
 			return fail(400, {
 				error: 'Du kannst dir selbst keine Rechte entziehen.'

@@ -39,7 +39,11 @@
 						active: [
 							'/(authenticated)/admin/overview',
 							'/(authenticated)/admin/groups',
+							'/(authenticated)/admin/groups/create',
+							'/(authenticated)/admin/groups/edit/[groupId]',
 							'/(authenticated)/admin/terms',
+							'/(authenticated)/admin/terms/create',
+							'/(authenticated)/admin/terms/edit/[termId]',
 							'/(authenticated)/admin/users',
 							'/(authenticated)/admin/users/create',
 							'/(authenticated)/admin/users/edit/[userId]'

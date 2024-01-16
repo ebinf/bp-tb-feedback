@@ -7,8 +7,8 @@
 	import { writable } from 'svelte/store';
 	import { title, heading } from '../../stores';
 	import type { PollRound } from '@prisma/client';
-	title.set(`Gruppe ${data?.group?.number}: ${data?.group?.name}`);
-	heading.set(
+	$: title.set(`Gruppe ${data?.group?.number}: ${data?.group?.name}`);
+	$: heading.set(
 		`<span class="text-gray-500 font-medium pr-3">${data?.group?.number} </span>${data?.group?.name}`
 	);
 
