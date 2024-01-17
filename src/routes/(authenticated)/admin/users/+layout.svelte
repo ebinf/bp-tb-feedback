@@ -1,36 +1,44 @@
 <script lang="ts">
-	import Button from '$lib/components/button.svelte';
-	import Table from './table.svelte';
+	import Header from '$lib/components/header.svelte';
+	import Table from '$lib/components/table.svelte';
 
 	export let data;
+
+	let users: { link: string; data: Record<string, string> }[] = [];
+
+	$: {
+		users = [];
+		data.users.forEach((user) => {
+			users.push({
+				link: `/admin/users/edit/${user.id}`,
+				data: {
+					full_name: user.full_name,
+					mail: user.email,
+					role: user.admin ? 'Administrator:in' : 'Teambegleiter:in',
+					groups: user._count.Group == 1 ? '1 Gruppe' : `${user._count.Group} Gruppen`
+				}
+			});
+		});
+	}
 </script>
 
-<div class="sm:flex sm:items-center">
-	<div class="sm:flex-auto">
-		<h1 class="text-base font-semibold leading-6 text-gray-900">Nutzer:innen</h1>
-		<p class="mt-2 text-sm text-gray-700">
-			Hier kannst du die Nutzerinnen und Nutzer verwalten und neue anlegen. Nutzer:innen können
-			sowohl Teambegleitungen sein, als auch Administrator:innen.
-		</p>
-	</div>
-	<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-		<Button href="/admin/users/create" scheme="primary"
-			><svg
-				slot="icon"
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="2"
-				stroke="currentColor"
-			>
-				<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-			</svg>
+<Header href="/admin/users/create">
+	<span slot="heading">Nutzer:innen</span>
+	<span slot="description"
+		>Hier kannst du die Nutzerinnen und Nutzer verwalten und neue anlegen. Nutzer:innen können
+		sowohl Teambegleitungen sein, als auch Administrator:innen.
+	</span>
+	<span slot="cta">Nutzer:in hinzufügen</span>
+</Header>
 
-			Nutzer:in hinzufügen</Button
-		>
-	</div>
-</div>
-
-<Table users={data.users}></Table>
+<Table
+	columns={[
+		{ key: 'full_name', title: 'Name' },
+		{ key: 'mail', title: 'E-Mail-Adresse' },
+		{ key: 'role', title: 'Rolle' },
+		{ key: 'groups', title: 'Gruppen' }
+	]}
+	rows={users}
+></Table>
 
 <slot />

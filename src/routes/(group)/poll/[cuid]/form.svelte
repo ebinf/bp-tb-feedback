@@ -35,10 +35,10 @@
 										class="{vote === i
 											? `bg-primary-600 text-white ${
 													disabled || formSubmitting ? 'opacity-80' : 'hover:bg-primary-500'
-											  }`
+												}`
 											: `text-gray-90 ring-1 ring-inset ring-gray-300 ${
 													disabled || formSubmitting ? 'bg-gray-50' : 'bg-white hover:bg-gray-50'
-											  }`} flex cursor-pointer items-center justify-center rounded-md px-3 py-3 text-sm font-semibold uppercase ring-offset-2 focus-within:ring-2 focus-within:ring-primary-600 focus:outline-none sm:flex-1"
+												}`} flex cursor-pointer items-center justify-center rounded-md px-3 py-3 text-sm font-semibold uppercase ring-offset-2 focus-within:ring-2 focus-within:ring-primary-600 focus:outline-none sm:flex-1"
 									>
 										<input
 											type="radio"

@@ -1,10 +1,27 @@
 <script lang="ts">
 	import { PUBLIC_BASE_URL } from '$env/static/public';
 	import Button from '$lib/components/button.svelte';
+	import Header from '$lib/components/header.svelte';
 	import Empty from './empty.svelte';
-	import Table from './table.svelte';
+	import Table from '$lib/components/table.svelte';
 
 	export let data;
+
+	let feedbacks: { highlight?: boolean; link?: string; data: Record<string, string> }[] = [];
+	$: {
+		feedbacks = [];
+		data.feedback?.forEach((feedback) => {
+			feedbacks.push({
+				highlight: feedback.read == null,
+				link: `/group/${data.group?.id}/feedback/${feedback.id}`,
+				data: {
+					name: feedback.name ?? `Anonym`,
+					date: `${feedback.timestamp.toLocaleString()} Uhr`,
+					message: feedback.feedback
+				}
+			});
+		});
+	}
 
 	let copiedText = false;
 
@@ -25,15 +42,13 @@
 	}
 </script>
 
-<div class="sm:flex sm:items-center">
-	<div class="sm:flex-auto">
-		<h1 class="text-base font-semibold leading-6 text-gray-900">Feedback</h1>
-		<p class="mt-2 text-sm text-gray-700">
-			Hier erscheint das Feedback, das die Gruppe dir über ihren Link gegeben hat. Teile den Link
-			mit der Gruppe, um Feedback zu erhalten.
-		</p>
-	</div>
-	<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+<Header>
+	<span slot="heading">Feedback</span>
+	<span slot="description"
+		>Hier erscheint das Feedback, das die Gruppe dir über ihren Link gegeben hat. Teile den Link mit
+		der Gruppe, um Feedback zu erhalten.</span
+	>
+	<span slot="buttons">
 		{#if data.group?.feedback_link?.length}
 			<Button on:click={shareOrCopy}
 				><svg
@@ -73,11 +88,18 @@
 				>
 			</form>
 		{/if}
-	</div>
-</div>
+	</span>
+</Header>
 
 {#if data.feedback?.length}
-	<Table data={data.feedback} />
+	<Table
+		columns={[
+			{ key: 'name', title: 'Name' },
+			{ key: 'date', title: 'Datum' },
+			{ key: 'message', title: 'Nachricht' }
+		]}
+		rows={feedbacks}
+	></Table>
 {:else}
 	<Empty data={{ link_created: !!data.group?.feedback_link?.length }} />
 {/if}

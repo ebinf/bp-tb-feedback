@@ -1,39 +1,45 @@
 <script lang="ts">
-	import Button from '$lib/components/button.svelte';
+	import Header from '$lib/components/header.svelte';
 	import Empty from './empty.svelte';
-	import Table from './table.svelte';
+	import Table from '$lib/components/table.svelte';
 
 	export let data;
+
+	let polls: { highlight?: boolean; link?: string; data: Record<string, string> }[] = [];
+	$: {
+		polls = [];
+		data.polls?.forEach((poll) => {
+			polls.push({
+				highlight: poll.open,
+				link: `/group/${data.group?.id}/polls/${poll.id}`,
+				data: {
+					created: `${poll.created.toLocaleString()} Uhr`,
+					question: poll.question,
+					votes: poll._count.votes == 1 ? '1 Stimme' : `${poll._count.votes} Stimmen`
+				}
+			});
+		});
+	}
 </script>
 
-<div class="sm:flex sm:items-center">
-	<div class="sm:flex-auto">
-		<h1 class="text-base font-semibold leading-6 text-gray-900">Stimmung</h1>
-		<p class="mt-2 text-sm text-gray-700">
-			Hier kannst von der Gruppe Stimmungsbilder einholen. Du kannst dabei eine spezielle Frage
-			stellen oder die allgemeine Stimmung bewerten lassen.
-		</p>
-	</div>
-	<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-		<Button href="/group/{data.group?.id}/polls/create"
-			><svg
-				slot="icon"
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="2"
-				stroke="currentColor"
-			>
-				<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-			</svg>
-
-			Neue Runde</Button
-		>
-	</div>
-</div>
+<Header href="/group/{data.group?.id}/polls/create">
+	<span slot="heading">Stimmungsbilder</span>
+	<span slot="description"
+		>Hier kannst von der Gruppe Stimmungsbilder einholen. Du kannst dabei eine spezielle Frage
+		stellen oder die allgemeine Stimmung bewerten lassen.
+	</span>
+	<span slot="cta">Neue Runde</span>
+</Header>
 
 {#if data?.polls?.length}
-	<Table polls={data.polls} />
+	<Table
+		columns={[
+			{ key: 'created', title: 'Erstellt' },
+			{ key: 'question', title: 'Fragestellung' },
+			{ key: 'votes', title: 'Stimmen' }
+		]}
+		rows={polls}
+	></Table>
 {:else}
 	<Empty createLink="/group/{data.group?.id}/polls/create" />
 {/if}

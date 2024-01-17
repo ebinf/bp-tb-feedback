@@ -1,36 +1,42 @@
 <script lang="ts">
-	import Button from '$lib/components/button.svelte';
-	import Table from './table.svelte';
+	import Header from '$lib/components/header.svelte';
+	import Table from '$lib/components/table.svelte';
 
 	export let data;
+
+	let groups: { link: string; data: Record<string, string> }[] = [];
+	$: {
+		groups = [];
+		data.groups.forEach((group) => {
+			groups.push({
+				link: `/admin/groups/edit/${group.id}`,
+				data: {
+					number: group.number.toString(),
+					name: group.name,
+					term: group.term.name,
+					lead: group.lead.full_name
+				}
+			});
+		});
+	}
 </script>
 
-<div class="sm:flex sm:items-center">
-	<div class="sm:flex-auto">
-		<h1 class="text-base font-semibold leading-6 text-gray-900">Gruppen</h1>
-		<p class="mt-2 text-sm text-gray-700">
-			Hier kannst du die Gruppen verwalten und neue anlegen. Du kannst sie einem Semester und einer
-			Teambegleitung zuordnen.
-		</p>
-	</div>
-	<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-		<Button href="/admin/groups/create" scheme="primary"
-			><svg
-				slot="icon"
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="2"
-				stroke="currentColor"
-			>
-				<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-			</svg>
+<Header href="/admin/groups/create">
+	<span slot="heading">Gruppen</span>
+	<span slot="description"
+		>Hier kannst du die Gruppen verwalten und neue anlegen. Du kannst sie einem Semester und einer
+		Teambegleitung zuordnen.</span
+	>
+	<span slot="cta">Gruppe hinzufügen</span>
+</Header>
 
-			Gruppe hinzufügen</Button
-		>
-	</div>
-</div>
-
-<Table groups={data.groups}></Table>
-
+<Table
+	columns={[
+		{ key: 'number', title: 'Nummer' },
+		{ key: 'name', title: 'Name' },
+		{ key: 'term', title: 'Semester' },
+		{ key: 'lead', title: 'Teambegleitung' }
+	]}
+	rows={groups}
+></Table>
 <slot />
