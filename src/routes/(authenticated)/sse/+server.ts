@@ -16,6 +16,11 @@ export const GET = async ({ locals }) => {
 					Feedback: true,
 					PollRound: true
 				}
+			},
+			Note: {
+				select: {
+					id: true
+				}
 			}
 		}
 	});
@@ -30,6 +35,9 @@ export const GET = async ({ locals }) => {
 		group.PollRound.forEach((poll) => {
 			events.add(`pollRound:${poll.id}`);
 		});
+	});
+	user.Note.forEach((note) => {
+		events.add(`note:${note.id}`);
 	});
 	if (user.admin) {
 		events.add('admin:terms');

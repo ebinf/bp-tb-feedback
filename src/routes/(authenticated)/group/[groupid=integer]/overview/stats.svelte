@@ -7,7 +7,7 @@
 </script>
 
 <div>
-	<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+	<dl class="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-4">
 		<a
 			href="/group/{data.group?.id}/feedback"
 			class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
@@ -54,6 +54,17 @@
 				<dt class="truncate text-sm font-medium text-gray-500">Stimmen</dt>
 				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
 					{votes}
+				</dd>
+			</div>
+		</a>
+		<a
+			href="/group/{data.group?.id}/notes"
+			class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+		>
+			<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+				<dt class="truncate text-sm font-medium text-gray-500">Notizen</dt>
+				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+					{data.notes?.length}
 				</dd>
 			</div>
 		</a>

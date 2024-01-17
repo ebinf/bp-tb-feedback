@@ -89,9 +89,8 @@
 											<Toast style="fail">{form.error}</Toast>
 										{/if}
 										<div>
-											<label
-												for="full_name"
-												class="block text-sm font-medium leading-6 text-gray-900">Name</label
+											<label for="name" class="block text-sm font-medium leading-6 text-gray-900"
+												>Name</label
 											>
 											<div class="group relative mt-2">
 												<input

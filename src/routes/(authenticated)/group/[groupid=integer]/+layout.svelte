@@ -34,6 +34,15 @@
 				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]',
 				'/(authenticated)/group/[groupid=integer]/polls/[pollid=integer]/edit'
 			]
+		},
+		{
+			name: 'Notizen',
+			href: `/group/${data.group?.id}/notes`,
+			active: [
+				'/(authenticated)/group/[groupid=integer]/notes/create',
+				'/(authenticated)/group/[groupid=integer]/notes/[noteid=integer]',
+				'/(authenticated)/group/[groupid=integer]/notes/[noteid=integer]/edit'
+			]
 		}
 	];
 

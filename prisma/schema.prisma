@@ -11,8 +11,8 @@ datasource db {
 }
 
 model User {
-  id        String @id @unique
-  email     String @unique
+  id        String  @id @unique
+  email     String  @unique
   full_name String /// @encrypted
   admin     Boolean @default(false)
 
@@ -20,12 +20,13 @@ model User {
   key                 Key[]
   Group               Group[]
   PasswordResetTokens PasswordResetTokens[]
+  Note                Note[]
 }
 
 model PasswordResetTokens {
-  id      String @id @unique
+  id      String   @id @unique
   user_id String
-  user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  user    User     @relation(references: [id], fields: [user_id], onDelete: Cascade)
   expires DateTime
 
   @@index([user_id])
@@ -69,6 +70,7 @@ model Group {
   feedback_link String?     @unique
   Feedback      Feedback[]
   PollRound     PollRound[]
+  Note          Note[]
 }
 
 model Feedback {
@@ -99,4 +101,15 @@ model Vote {
   poll_round    PollRound @relation(references: [id], fields: [poll_round_id], onDelete: Cascade)
   vote          Int
   comment       String? /// @encrypted
+}
+
+model Note {
+  id        Int      @id @unique @default(autoincrement())
+  group_id  Int
+  group     Group    @relation(references: [id], fields: [group_id], onDelete: Cascade)
+  author_id String
+  author    User     @relation(references: [id], fields: [author_id], onDelete: Cascade)
+  edited    DateTime @default(now())
+  title     String /// @encrypted
+  note      String   @db.Text /// @encrypted
 }

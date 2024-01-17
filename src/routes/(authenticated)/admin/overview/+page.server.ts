@@ -11,6 +11,7 @@ export const load: PageServerLoad = async ({ depends }) => {
 		terms: await client.term.count(),
 		polls: await client.pollRound.count(),
 		votes: await client.vote.count(),
-		feedbacks: await client.feedback.count()
+		feedbacks: await client.feedback.count(),
+		notes: await client.note.count()
 	};
 };

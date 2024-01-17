@@ -2,7 +2,6 @@
 	import Header from '$lib/components/header.svelte';
 	import Empty from './empty.svelte';
 	import Table from '$lib/components/table.svelte';
-	import { gray } from 'tailwindcss/colors';
 
 	export let data;
 

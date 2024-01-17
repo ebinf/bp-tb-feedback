@@ -14,7 +14,7 @@
 			name: 'Semester',
 			href: `/admin/terms`,
 			badge: data.terms,
-			active: ['/(authenticated)/admin/terms/edit/[userId]', '/(authenticated)/admin/terms/create']
+			active: ['/(authenticated)/admin/terms/edit/[termId]', '/(authenticated)/admin/terms/create']
 		},
 		{
 			name: 'Nutzer:innen',
@@ -27,7 +27,7 @@
 			href: `/admin/groups`,
 			badge: data.groups,
 			active: [
-				'/(authenticated)/admin/groups/edit/[userId]',
+				'/(authenticated)/admin/groups/edit/[groupId]',
 				'/(authenticated)/admin/groups/create'
 			]
 		}

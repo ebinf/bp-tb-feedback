@@ -39,6 +39,20 @@ export const load: LayoutServerLoad = async ({ locals, params, depends }) => {
 				}
 			}
 		});
+		const notes = await client.note.findMany({
+			where: {
+				group_id: group.id,
+				author_id: locals.session.user.userId
+			},
+			orderBy: {
+				edited: 'desc'
+			},
+			select: {
+				title: true,
+				edited: true,
+				id: true
+			}
+		});
 		depends(`term:${group.term_id}`);
 		depends(`group:${group.id}`);
 		for (const ipoll of polls) {
@@ -47,10 +61,14 @@ export const load: LayoutServerLoad = async ({ locals, params, depends }) => {
 		for (const ifeedback of feedback) {
 			depends(`feedback:${ifeedback.id}`);
 		}
+		for (const inote of notes) {
+			depends(`note:${inote.id}`);
+		}
 		return {
 			group,
 			feedback,
 			polls,
+			notes,
 			unread_feedback: feedback.filter((f) => !f.read).length
 		};
 	} catch (e) {
