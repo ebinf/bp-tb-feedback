@@ -66,7 +66,7 @@ model Group {
   term          Term        @relation(references: [id], fields: [term_id], onDelete: Cascade)
   lead_id       String
   lead          User        @relation(references: [id], fields: [lead_id], onDelete: Cascade)
-  feedback_link String?     @unique @default(cuid())
+  feedback_link String?     @unique
   Feedback      Feedback[]
   PollRound     PollRound[]
 }
