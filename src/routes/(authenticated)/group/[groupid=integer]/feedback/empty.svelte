@@ -1,7 +1,6 @@
 <script lang="ts">
-	export let data: {
-		link_created: Boolean;
-	};
+	export let link_created: Boolean;
+	export let active: Boolean = false;
 </script>
 
 <div class="mt-8 flow-root rounded-lg bg-white px-4 py-12 text-center shadow">
@@ -19,9 +18,13 @@
 		/>
 	</svg>
 
-	<h3 class="mt-2 text-sm font-semibold text-gray-900">Bisher kein Feedback</h3>
+	<h3 class="mt-2 text-sm font-semibold text-gray-900">
+		{#if active}Bisher kein Feedback{:else}Kein Feedback erhalten{/if}
+	</h3>
 	<p class="mt-1 text-sm text-gray-500">
-		{#if data.link_created}
+		{#if !active}
+			Die Gruppe hat dir kein Feedback gegeben.
+		{:else if link_created}
 			Bislang hat die Gruppe dir kein Feedback gegeben. Bitte warte noch einen Moment ab und stelle
 			sicher, dass du der Gruppe <a
 				href="overview"

@@ -140,6 +140,7 @@ export const actions: Actions = {
 
 			if (group.lead_id != dbLead.id) {
 				SSEEvents.registerNewEvent(`group:${group.id}`, `user:${dbLead.id}`);
+				SSEEvents.registerNewEvent(`term:${group.term_id}`, `user:${dbLead.id}`);
 				SSEEvents.emit(`user:${group.lead_id}`);
 				SSEEvents.emit(`user:${dbLead.id}`);
 

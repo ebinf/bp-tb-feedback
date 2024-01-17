@@ -39,6 +39,7 @@ export const load: LayoutServerLoad = async ({ locals, params, depends }) => {
 				}
 			}
 		});
+		depends(`term:${group.term_id}`);
 		depends(`group:${group.id}`);
 		for (const ipoll of polls) {
 			depends(`pollRound:${ipoll.id}`);

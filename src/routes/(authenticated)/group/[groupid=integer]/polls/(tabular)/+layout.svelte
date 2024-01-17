@@ -2,6 +2,7 @@
 	import Header from '$lib/components/header.svelte';
 	import Empty from './empty.svelte';
 	import Table from '$lib/components/table.svelte';
+	import { gray } from 'tailwindcss/colors';
 
 	export let data;
 
@@ -22,11 +23,12 @@
 	}
 </script>
 
-<Header href="/group/{data.group?.id}/polls/create">
+<Header href={data.group?.term.active ? `/group/${data.group?.id}/polls/create` : ''}>
 	<span slot="heading">Stimmungsbilder</span>
 	<span slot="description"
-		>Hier kannst von der Gruppe Stimmungsbilder einholen. Du kannst dabei eine spezielle Frage
-		stellen oder die allgemeine Stimmung bewerten lassen.
+		>{#if data.group?.term.active}Hier kannst von der Gruppe Stimmungsbilder einholen. Du kannst
+			dabei eine spezielle Frage stellen oder die allgemeine Stimmung bewerten lassen.{:else}Hier
+			siehst du die Stimmungsbilder, die du von der Gruppe eingeholt hast.{/if}
 	</span>
 	<span slot="cta">Neue Runde</span>
 </Header>
@@ -41,7 +43,7 @@
 		rows={polls}
 	></Table>
 {:else}
-	<Empty createLink="/group/{data.group?.id}/polls/create" />
+	<Empty createLink="/group/{data.group?.id}/polls/create" active={data.group?.term.active} />
 {/if}
 
 <slot />

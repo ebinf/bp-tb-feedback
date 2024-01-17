@@ -7,6 +7,7 @@
 	export let poll: PollRound & { votes: Vote[] };
 	export let votes: Vote[];
 	export let comments: Vote[];
+	export let term_active: boolean = false;
 
 	let copiedText = false;
 
@@ -111,72 +112,74 @@
 			</div>
 		</div>
 	</div>
-	<div class="mt-5 flex lg:ml-4 lg:mt-0">
-		<span>
-			<Button scheme="secondary" href="{poll.id}/edit">
-				<svg slot="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-					<path
-						d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z"
-					/>
-				</svg>
-				Bearbeiten
-			</Button>
-		</span>
+	{#if term_active}
+		<div class="mt-5 flex lg:ml-4 lg:mt-0">
+			<span>
+				<Button scheme="secondary" href="{poll.id}/edit">
+					<svg slot="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+						<path
+							d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z"
+						/>
+					</svg>
+					Bearbeiten
+				</Button>
+			</span>
 
-		<span class="ml-3">
-			<Button scheme="secondary" on:click={shareOrCopy}>
-				<svg slot="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-					<path
-						d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z"
-					/>
-					<path
-						d="M11.603 7.963a.75.75 0 00-.977 1.138 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.536l1.225-1.224a.75.75 0 00-1.061-1.06l-1.224 1.224a4 4 0 105.656 5.656l3-3a4 4 0 00-.225-5.865z"
-					/>
-				</svg>
-				{#if copiedText}Link kopiert!{:else}Teilen{/if}
-			</Button>
-		</span>
+			<span class="ml-3">
+				<Button scheme="secondary" on:click={shareOrCopy}>
+					<svg slot="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+						<path
+							d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z"
+						/>
+						<path
+							d="M11.603 7.963a.75.75 0 00-.977 1.138 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.536l1.225-1.224a.75.75 0 00-1.061-1.06l-1.224 1.224a4 4 0 105.656 5.656l3-3a4 4 0 00-.225-5.865z"
+						/>
+					</svg>
+					{#if copiedText}Link kopiert!{:else}Teilen{/if}
+				</Button>
+			</span>
 
-		<span class="ml-3">
-			{#if poll.open}
-				<form method="POST" action="?/close" use:enhance>
-					<Button scheme="primary" submit={true}>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-							slot="icon"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
-								clip-rule="evenodd"
-							/>
-						</svg>
+			<span class="ml-3">
+				{#if poll.open}
+					<form method="POST" action="?/close" use:enhance>
+						<Button scheme="primary" submit={true}>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								slot="icon"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+									clip-rule="evenodd"
+								/>
+							</svg>
 
-						Schließen
-					</Button>
-				</form>
-			{:else}
-				<form method="POST" action="?/open" use:enhance>
-					<Button scheme="primary" submit={true}>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-							slot="icon"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M14.5 1A4.5 4.5 0 0010 5.5V9H3a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1.5V5.5a3 3 0 116 0v2.75a.75.75 0 001.5 0V5.5A4.5 4.5 0 0014.5 1z"
-								clip-rule="evenodd"
-							/>
-						</svg>
+							Schließen
+						</Button>
+					</form>
+				{:else}
+					<form method="POST" action="?/open" use:enhance>
+						<Button scheme="primary" submit={true}>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								slot="icon"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M14.5 1A4.5 4.5 0 0010 5.5V9H3a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1.5V5.5a3 3 0 116 0v2.75a.75.75 0 001.5 0V5.5A4.5 4.5 0 0014.5 1z"
+									clip-rule="evenodd"
+								/>
+							</svg>
 
-						Öffnen
-					</Button>
-				</form>
-			{/if}
-		</span>
-	</div>
+							Öffnen
+						</Button>
+					</form>
+				{/if}
+			</span>
+		</div>
+	{/if}
 </div>

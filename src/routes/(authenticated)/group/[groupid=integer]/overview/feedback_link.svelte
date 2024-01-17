@@ -88,9 +88,8 @@
 					</form>
 				{/if}
 			{:else}
-				<span class="italic"
-					>Das Semester dieser Gruppe ist nicht mehr aktiv. Du kannst daher kein Feedback mehr
-					erhalten.</span
+				<span class="text-sm italic text-gray-900"
+					>Das Semester dieser Gruppe ist nicht aktiv. Du kannst daher kein Feedback mehr erhalten.</span
 				>
 			{/if}
 

@@ -44,7 +44,12 @@ export const actions: Actions = {
 			await client.pollRound.update({
 				where: {
 					id: pollid,
-					group_id: groupid
+					group: {
+						id: groupid,
+						term: {
+							active: true
+						}
+					}
 				},
 				data: {
 					open: state == 'open',

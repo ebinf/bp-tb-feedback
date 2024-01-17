@@ -40,6 +40,7 @@ export const load: PageServerLoad = async ({ locals, params, depends }) => {
 			}
 		});
 
+		depends('admin:users');
 		depends(`user:${userId}`);
 
 		const keys = await auth.getAllUserKeys(userId);

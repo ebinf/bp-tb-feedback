@@ -4,16 +4,13 @@
 	import Toast from '$lib/components/toast.svelte';
 	import { classes } from 'svelte-transition-classes';
 	import Modal from '$lib/components/modal.svelte';
-	import { afterUpdate } from 'svelte';
 
 	export let data;
 	export let form;
 
 	let editFormSubmitting: boolean = false;
-	let resendWelcomeMailFormSubmitting: boolean = false;
-	let deleteUserFormSubmitting: boolean = false;
-	$: anyFormSubmitting =
-		editFormSubmitting || resendWelcomeMailFormSubmitting || deleteUserFormSubmitting;
+	let deleteGroupFormSubmitting: boolean = false;
+	$: anyFormSubmitting = editFormSubmitting || deleteGroupFormSubmitting;
 
 	let deleteModalShown: boolean = false;
 	let deleteForm: HTMLFormElement;
@@ -269,7 +266,7 @@
 											class="sm:w-full"
 											scheme="danger"
 											disabled={anyFormSubmitting}
-											spinner={deleteUserFormSubmitting}
+											spinner={deleteGroupFormSubmitting}
 											on:click={() => {
 												deleteModalShown = true;
 											}}>Gruppe löschen</Button
@@ -304,10 +301,10 @@
 	action="?/delete"
 	bind:this={deleteForm}
 	use:enhance={() => {
-		deleteUserFormSubmitting = true;
+		deleteGroupFormSubmitting = true;
 		return async ({ update }) => {
 			update({ reset: false });
-			deleteUserFormSubmitting = false;
+			deleteGroupFormSubmitting = false;
 		};
 	}}
 ></form>

@@ -10,7 +10,10 @@ export const actions: Actions = {
 			await client.group.update({
 				where: {
 					id: parseInt(params.groupid),
-					lead_id: locals.session.user.userId
+					lead_id: locals.session.user.userId,
+					term: {
+						active: true
+					}
 				},
 				data: {
 					feedback_link: createId()

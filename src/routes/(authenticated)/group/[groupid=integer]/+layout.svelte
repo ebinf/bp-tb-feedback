@@ -45,7 +45,7 @@
 
 <p class="text-gray-500">
 	{data.group?.term?.name}
-	{#if !data.group?.term.active}<span class="italic">(nicht mehr aktiv)</span>{/if}
+	{#if !data.group?.term.active}<span class="italic">(nicht aktiv)</span>{/if}
 </p>
 
 <div class="border-b border-gray-200 pb-5 sm:pb-0">

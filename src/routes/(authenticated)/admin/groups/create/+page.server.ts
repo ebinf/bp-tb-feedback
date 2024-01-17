@@ -88,6 +88,7 @@ export const actions: Actions = {
 			SSEEvents.emit('admin:groups');
 			SSEEvents.emit(`user:${dbLead.id}`);
 			SSEEvents.registerNewEvent(`group:${newGroup.id}`, `user:${dbLead.id}`);
+			SSEEvents.registerNewEvent(`term:${newGroup.term_id}`, `user:${dbLead.id}`);
 			SSEEvents.emit(`group:${newGroup.id}`);
 
 			if (send_mail == 'on') {

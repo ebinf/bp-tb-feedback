@@ -39,7 +39,7 @@
 	$: comments = votes.filter((v) => v.comment);
 </script>
 
-<Header poll={data.poll_details} {comments} {votes}></Header>
+<Header poll={data.poll_details} term_active={data.group?.term.active} {comments} {votes}></Header>
 
 <div
 	class="mt-4 grid grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-4 lg:mx-0 lg:max-w-none lg:grid-cols-3"
