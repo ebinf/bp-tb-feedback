@@ -3,6 +3,7 @@
 	import Header from './header.svelte';
 	import { page } from '$app/stores';
 	import { createNotification } from '../../../../stores';
+	import DOMPurify from 'isomorphic-dompurify';
 
 	export let data;
 
@@ -23,6 +24,10 @@
 
 <div class="mt-8 rounded-lg bg-white p-4 shadow">
 	<div class="prose prose-sm leading-relaxed">
-		{@html marked(data.note.note)}
+		{#await marked.parse(data.note.note)}
+			<span class="text-sm italic">Lädt...</span>
+		{:then mdcontent}
+			{@html DOMPurify.sanitize(mdcontent)}
+		{/await}
 	</div>
 </div>

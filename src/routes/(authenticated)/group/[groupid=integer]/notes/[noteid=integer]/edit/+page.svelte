@@ -3,6 +3,7 @@
 	import Button from '$lib/components/button.svelte';
 	import Toast from '$lib/components/toast.svelte';
 	import { marked } from 'marked';
+	import DOMPurify from 'isomorphic-dompurify';
 
 	export let form;
 	export let data;
@@ -140,7 +141,11 @@
 					<div class="border-b">
 						<div class="prose prose-sm mx-px mt-px px-3 pb-12 pt-2 text-sm leading-5 text-gray-800">
 							{#if content}
-								{@html marked(content)}
+								{#await marked.parse(content)}
+									<span class="text-sm italic">Lädt...</span>
+								{:then mdcontent}
+									{@html DOMPurify.sanitize(mdcontent)}
+								{/await}
 							{:else}
 								<span class="text-sm italic">Dein Text wird dir hier angezeigt.</span>
 							{/if}
