@@ -4,6 +4,7 @@
 	import { title, heading } from './stores';
 	import { onMount } from 'svelte';
 	import { invalidate } from '$app/navigation';
+	import { PUBLIC_BASE_URL, PUBLIC_SITE_NAME } from '$env/static/public';
 
 	export let data;
 
@@ -17,6 +18,15 @@
 
 <svelte:head>
 	<title>{$title}</title>
+	<meta property="og:site_name" content={PUBLIC_SITE_NAME} />
+	<meta property="og:locale" content="de_DE" />
+	<meta property="og:title" content={$title} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={PUBLIC_BASE_URL} />
+	<meta
+		property="og:description"
+		content="Erhalte anonymes Feedback, erstelle Stimmungsbilder und mehr!"
+	/>
 </svelte:head>
 
 <div class="min-h-full">

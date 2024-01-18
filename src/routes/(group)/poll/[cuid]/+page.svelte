@@ -2,6 +2,7 @@
 	import Toast from '$lib/components/toast.svelte';
 	import Form from './form.svelte';
 	import Sidebar from '../../sidebar.svelte';
+	import { PUBLIC_BASE_URL, PUBLIC_SITE_NAME } from '$env/static/public';
 
 	export let data;
 	export let form;
@@ -9,6 +10,12 @@
 
 <svelte:head>
 	<title>Stimmungsbild {data.group.number}: {data.group.name}</title>
+	<meta property="og:site_name" content={PUBLIC_SITE_NAME} />
+	<meta property="og:locale" content="de_DE" />
+	<meta property="og:title" content="Stimmungsbild {data.group.number}: {data.group.name}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{PUBLIC_BASE_URL}/poll/{data.link}" />
+	<meta property="og:description" content="{data.question} Nimm am Stimmungsbild teil!" />
 </svelte:head>
 
 <main>

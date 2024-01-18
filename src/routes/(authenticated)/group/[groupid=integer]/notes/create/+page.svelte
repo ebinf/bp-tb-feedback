@@ -145,6 +145,7 @@
 						</div>
 					</div>
 				</div>
+				<input type="hidden" name="note" value={content} />
 			{:else}
 				<div
 					id="tabs-1-panel-1"
